@@ -1,0 +1,7 @@
+{
+    "short_name": "Bavarder",
+    "name": "Bavarder",
+    "start_url": "/",
+    "display": "standalone",
+    "scope": "/"
+}

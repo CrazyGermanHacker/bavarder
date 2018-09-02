@@ -1,0 +1,11 @@
+body, html{
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+.hd{
+    box-shadow: 0 2px 4px #00000061;
+    height: 48px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
