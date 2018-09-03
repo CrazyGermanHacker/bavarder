@@ -3,5 +3,13 @@
     "name": "Bavarder",
     "start_url": "/",
     "display": "standalone",
-    "scope": "/"
+    "scope": "/",
+    "icons": [
+        {
+            "src": "/icon-512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ],
+    "theme_color": "#d32f2f"
 }

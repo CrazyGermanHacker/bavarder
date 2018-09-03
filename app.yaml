@@ -11,3 +11,9 @@ handlers:
 - url: /manifest.webmanifest
   static_files: static/manifest.webmanifest
   upload: static/manifest.webmanifest
+- url: /icon-512.png
+  static_files: static/icon-512.png
+  upload: static/icon-512.png
+- url: /bavarder.js
+  static_files: scripts/bavarder.js
+  upload: scripts/bavarder.js

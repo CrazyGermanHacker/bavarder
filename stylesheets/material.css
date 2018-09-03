@@ -1,11 +1,81 @@
+/*
+#d32f2f
+#ff6659
+#9a0007
+*/
 body, html{
     margin: 0;
     padding: 0;
+    height: 100%;
     font-family: 'Montserrat', sans-serif;
+    overflow: hidden;
+}
+input{
+    border: 1px solid black;
+    border-radius: 4px;
+    font-family: 'Montserrat', sans-serif;
+    padding: 4px;
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}:focus{
+    outline: none;
+    border: 1px solid #d32f2f;
+}
+button{
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    background: #d32f2f;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 2px 2px #00000061;
+    padding: 4px;
+    padding-right: 16px;
+    padding-left: 16px;
+    font-size: 16px;
+}:hover{
+    background-color: #ff6659;
+}
+button:focus{
+    outline: none;
 }
 .hd{
-    box-shadow: 0 2px 4px #00000061;
     height: 48px;
-    margin-top: 16px;
-    margin-bottom: 16px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-left: 4px;
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+.scroll{
+    overflow-y: auto;
+    width: 100%;
+    bottom: 0px;
+    top: 80px;
+    position: fixed;
+}
+.hd h2{
+    margin: 0;
+}
+.chatbutton:hover{
+    background: #afafaf61;
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+.card{
+    box-shadow: 0 2px 1px #00000061;
+    margin: 4px;
+    padding: 4px;
+    text-align: center
+}
+.material-icons{
+    display: inline; 
+    vertical-align: middle;
+    margin-right: 8px;
+    margin-left: 8px;
+}
+.add_chat_screen{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    bottom: -100%;
+    transition: all 0.25s cubic-bezier(.25,.8,.25,1);
+    background: white;
 }
