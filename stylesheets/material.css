@@ -7,13 +7,13 @@ body, html{
     margin: 0;
     padding: 0;
     height: 100%;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Poppins', sans-serif;
     overflow: hidden;
 }
 input{
     border: 1px solid black;
     border-radius: 4px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Poppins', sans-serif;
     padding: 4px;
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }:focus{
@@ -43,7 +43,6 @@ button:focus{
     padding-top: 16px;
     padding-bottom: 16px;
     padding-left: 4px;
-    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 .scroll{
     overflow-y: auto;
@@ -78,4 +77,19 @@ button:focus{
     bottom: -100%;
     transition: all 0.25s cubic-bezier(.25,.8,.25,1);
     background: white;
+}
+.chat_screen{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0%;
+    right: -100%;
+    transition: all 0.25s cubic-bezier(.25,.8,.25,1);
+    background: white;
+}
+.wrapper3{
+    width: 100%;
+    display: grid;
+    margin: 0 auto;
+    grid-template-columns: 1fr 1fr 1fr;
 }

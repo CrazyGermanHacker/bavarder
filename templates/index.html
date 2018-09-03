@@ -1,36 +1,36 @@
-<div class="hd" style="text-align: center;">
-    <h2>Bavarder</h2>
+$def with(users)
+<div class="hd wrapper3">
+    <div></div>
+    <h2 style="text-align: center;">Bavarder</h2>
+    <div style="text-align: right;"><i class="material-icons" style="font-size: 32px;">more_vert</i></div>
 </div>
 
-<div class="scroll">
+<div class="scroll" onscroll="osc(0,0)">
     <div class="card">
         <div class="chatbutton" style="color: #d32f2f" onclick="add_chat_action()">
             <h3><i class="material-icons" style="font-size: 32px">add_circle</i>Add Chat</h3>
         </div>
     </div>
     <div class="card">
-        <div class="chatbutton">
-            <h3>Sample Human 1</h3>
-        </div>
-        <div class="chatbutton">
-            <h3>Sample Human 2</h3>
-        </div>
-        <div class="chatbutton">
-            <h3>Sample Human 3</h3>
-        </div>
-        <div class="chatbutton">
-            <h3>Sample Human 4</h3>
-        </div>
+        $for x in range(len(users)):
+            <div class="chatbutton" onclick="chat_action('$users[x]')">
+                <h3>$users[x]</h3>
+            </div>
     </div>
 </div>
 <div class="add_chat_screen">
     <div class="hd">
-        <h2><i class="material-icons" style="font-size: 32px" onclick="back_chat_action()">arrow_back</i>Add Chat</h2>
+        <h2><i class="material-icons" style="font-size: 32px" onclick="back_add_chat_action()">arrow_back</i>Add Chat</h2>
     </div>
     <div class="card">
         <input type="text" placeholder="username" id="unameip">
         <br />
         <br />
         <button onclick="back_chat_action()"><b>ADD</b></button>
+    </div>
+</div>
+<div class="chat_screen">
+    <div class="hd">
+        <h2><i class="material-icons" style="font-size: 32px" onclick="back_chat_action()">arrow_back</i><b id="user"></b></h2>
     </div>
 </div>
