@@ -1,4 +1,5 @@
 import web
+from google.appengine.ext import ndb
 
 urls=(
     "/", "index"
@@ -6,9 +7,7 @@ urls=(
 
 app=web.application(urls, globals())
 render=web.template.render("templates/", base="layout")
-users = [
-
-]
+users = []
 
 class index:
     def GET(self):

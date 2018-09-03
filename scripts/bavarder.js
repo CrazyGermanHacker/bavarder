@@ -10,7 +10,7 @@ window.addEventListener('load', function() {
 
 function isformchanged(){
     return new Promise((resolve, reject) => {
-        if (document.getElementById("unameip").value!=""){
+        if ((document.getElementById("unameip").value!="") && (document.getElementById("unameip").value!=null)){
             resolve()
         }
         else{
