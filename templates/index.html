@@ -30,10 +30,12 @@ $def with(users)
         <h2><i class="material-icons" style="font-size: 32px" onclick="back_add_chat_action()">arrow_back</i>Add Chat</h2>
     </div>
     <div class="card">
-        <input type="text" placeholder="username" id="unameip">
-        <br />
-        <br />
-        <button onclick="back_chat_action()"><b>ADD</b></button>
+        <form id="add_form" action="/" method="POST">
+            <input type="text" name="user" placeholder="username" id="unameip" />
+            <br />
+            <br />
+        </form>
+        <button id="add_btn" style="background: lightgrey; color: black" onclick="sub_add_form()" disabled><b>ADD</b></button>
     </div>
 </div>
 

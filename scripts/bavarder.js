@@ -7,10 +7,38 @@ window.addEventListener('load', function() {
         });
     });
 }
-  
+
+function isformchanged(){
+    return new Promise((resolve, reject) => {
+        if (document.getElementById("unameip").value!=""){
+            resolve()
+        }
+        else{
+            reject()
+        }
+    })
+}
+
+async function allowbtnclick(){
+    await isformchanged().then(function() {
+        document.getElementById("add_btn").style.background="#d32f2f";
+        document.getElementById("add_btn").style.color="white";
+        document.getElementById("add_btn").disabled = false;
+    }, function() {
+        setTimeout( function(){
+            allowbtnclick()
+        },
+        300)
+    })
+}
+
+function sub_add_form(){
+    document.getElementById("add_form").submit();
+}
 
 function add_chat_action(){
     document.getElementsByClassName("add_chat_screen")[0].style.bottom="0%";
+    allowbtnclick()
 }
 function back_add_chat_action(){
     document.getElementsByClassName("add_chat_screen")[0].style.bottom="-100%";
