@@ -30,3 +30,11 @@ function osc(x,y){
         document.getElementsByClassName("hd")[y].style.boxShadow="#00000061 0 2px 4px"
     }
 }
+function show_info_cards() {
+    if (document.getElementById("info").style.display=="none"){
+        document.getElementById("info").style.display= "inline";
+    }else{
+        document.getElementById("info").style.display= "none";
+    }
+    
+}

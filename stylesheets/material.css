@@ -42,7 +42,6 @@ button:focus{
     height: 48px;
     padding-top: 16px;
     padding-bottom: 16px;
-    padding-left: 4px;
 }
 .scroll{
     overflow-y: auto;
@@ -92,4 +91,19 @@ button:focus{
     display: grid;
     margin: 0 auto;
     grid-template-columns: 1fr 1fr 1fr;
+}
+.info{
+    position: fixed;
+    display: none;
+    width: 128px;
+    text-align: center;
+    margin: 0;
+    top: 48px;
+    right: 16px;
+    padding: 4px;
+    background: white;
+    box-shadow: 0 2px 8px #00000061;
+}
+.info:hover{
+    background: #afafaf61;
 }
