@@ -1,12 +1,12 @@
 if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-      navigator.serviceWorker.register('/sw.js', {updateViaCache: 'none'}).then(function(registration) {
+window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js', {updateViaCache: 'none'}).then(function(registration) {
         console.log('ServiceWorker registration successful with scope: ', registration.scope);
-      }, function(err) {
+        }, function(err) {
         console.log('ServiceWorker registration failed: ', err);
-      });
+        });
     });
-  }
+}
   
 
 function add_chat_action(){
@@ -36,5 +36,25 @@ function show_info_cards() {
     }else{
         document.getElementById("info").style.display= "none";
     }
-    
 }
+function show_signin_card() {
+    if (document.getElementById("gsignininfo").style.display=="none"){
+        document.getElementById("gsignininfo").style.display= "inline";
+    }else{
+        document.getElementById("gsignininfo").style.display= "none";
+    }
+}
+function onSignIn(googleUser){
+        // Useful data for your client-side scripts:
+    var profile = googleUser.getBasicProfile();
+    console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+    console.log('Full Name: ' + profile.getName());
+    console.log('Given Name: ' + profile.getGivenName());
+    console.log('Family Name: ' + profile.getFamilyName());
+    console.log("Image URL: " + profile.getImageUrl());
+    console.log("Email: " + profile.getEmail());
+
+    // The ID token you need to pass to your backend:
+    var id_token = googleUser.getAuthResponse().id_token;
+    console.log("ID Token: " + id_token);
+};
