@@ -24,7 +24,13 @@ async function allowbtnclick(){
         document.getElementById("add_btn").style.background="#d32f2f";
         document.getElementById("add_btn").style.color="white";
         document.getElementById("add_btn").disabled = false;
+        setTimeout( function(){
+            allowbtnclick()
+        },
+        300)
     }, function() {
+        document.getElementById("add_btn").style="background: lightgrey; color: black"
+        document.getElementById("add_btn").disabled = true;
         setTimeout( function(){
             allowbtnclick()
         },
