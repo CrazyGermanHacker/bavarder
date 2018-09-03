@@ -17,3 +17,9 @@ handlers:
 - url: /bavarder.js
   static_files: scripts/bavarder.js
   upload: scripts/bavarder.js
+- url: /sw.js
+  static_files: scripts/sw.js
+  upload: scripts/sw.js
+- url: /favicon.ico
+  static_files: static/favicon.ico
+  upload: static/favicon.ico
