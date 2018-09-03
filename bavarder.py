@@ -22,11 +22,6 @@ users = [
     "Sample Human 13",
     "Sample Human 14",
     "Sample Human 15",
-    "Sample Human 16",
-    "Sample Human 17",
-    "Sample Human 18",
-    "Sample Human 19",
-    "Sample Human 20"
 ]
 
 class index:
