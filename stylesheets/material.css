@@ -9,6 +9,7 @@ body, html{
     height: 100%;
     font-family: 'Poppins', sans-serif;
     overflow: hidden;
+    background: #fafafa;
 }
 input{
     border: 1px solid black;
@@ -75,7 +76,7 @@ button:focus{
     width: 100%;
     bottom: -100%;
     transition: all 0.25s cubic-bezier(.25,.8,.25,1);
-    background: white;
+    background: #fafafa
 }
 .chat_screen{
     position: fixed;
@@ -84,7 +85,16 @@ button:focus{
     top: 0%;
     right: -100%;
     transition: all 0.25s cubic-bezier(.25,.8,.25,1);
-    background: white;
+    background: #fafafa;
+}
+.wrappermsg{
+    width: 100%;
+    padding-top: 16px;
+    position: fixed;
+    bottom: 8px;
+    display: grid;
+    margin: 0 auto;
+    grid-template-columns: 1fr auto;
 }
 .wrapper3{
     width: 100%;
@@ -101,9 +111,38 @@ button:focus{
     top: 48px;
     right: 16px;
     padding: 4px;
-    background: white;
+    background: #fafafa;
     box-shadow: 0 2px 8px #00000061;
 }
 .info:hover{
     background: #afafaf61;
+}
+.messagebar{
+    box-shadow: 0 3px 6px #00000061;
+    width: 100%;
+    bottom: 8px;
+    height: 48px;
+    border-radius: 32px;
+    padding: 4px;
+    margin: 16px;
+    background: #fff;
+}
+.fib{
+    margin: 16px;
+    margin-left: 32px;
+    display: inline-block;
+    text-align: center;
+    padding-top: 12px;
+    padding-left: 4px;
+    background: #d32f2f;
+    box-shadow: 0 3px 6px #00000061;
+    border-radius: 128px;
+    width: 52px;
+    color: white;
+    transition: all 0.25s cubic-bezier(.25,.8,.25,1);
+    height: 44px;
+}
+.fib:hover{
+    background: #ff6659;
+    box-shadow: 0 3px 12px #00000061;
 }
