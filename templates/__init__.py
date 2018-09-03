@@ -8,7 +8,7 @@ def index(users):
     self = TemplateResult(); extend_ = self.extend
     extend_([u'<div class="hd wrapper3">\n'])
     extend_([u'    <div style="text-align: left;">\n'])
-    extend_([u'        <i class="material-icons" style="font-size: 32px;" onclick="show_signin_card()">person</i>\n'])
+    extend_([u'        <button style="background: white; border: 0 none; color: black; box-shadow: 0 0 0 white; padding: 0; margin: 0;"  onclick="show_signin_card()"><i class="material-icons" style="font-size: 32px;">person</i></button>\n'])
     extend_([u'        <div  style="left: 16px; position: fixed; display: none; top: 48px" id="gsignininfo">\n'])
     extend_([u'            <div class="g-signin2" data-onsuccess="onSignIn" data-theme="light"></div>\n'])
     extend_([u'        </div>\n'])
