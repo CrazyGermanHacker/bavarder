@@ -11,6 +11,15 @@ body, html{
     overflow: hidden;
     background: #fafafa;
 }
+a{
+    text-decoration: none;
+    color: black;
+}
+a:hover{
+    color: black;
+    background: #fafafa;
+    border: 0 none;
+}
 input{
     border: 1px solid black;
     border-radius: 4px;
@@ -50,6 +59,7 @@ button:focus{
     bottom: 0px;
     top: 80px;
     position: fixed;
+    z-index:1;
 }
 .hd h2{
     margin: 0;
@@ -59,16 +69,18 @@ button:focus{
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 .card{
-    box-shadow: 0 2px 1px #00000061;
+    box-shadow: 0 .5px 1px #00000061;
     margin: 4px;
     padding: 4px;
-    text-align: center
+    text-align: center;
+    background: #FFFFFF;
 }
 .material-icons{
     display: inline; 
     vertical-align: middle;
     margin-right: 8px;
     margin-left: 8px;
+    user-select: none;
 }
 .add_chat_screen{
     position: fixed;
@@ -112,9 +124,13 @@ button:focus{
     right: 16px;
     padding: 4px;
     background: #fafafa;
-    box-shadow: 0 2px 8px #00000061;
+    box-shadow: 0 4px 8px #00000061;
+    z-index:99;
 }
-.info:hover{
+.info div:hover{
+    background: #afafaf61;
+}
+.info a:hover{
     background: #afafaf61;
 }
 .messagebar{
@@ -144,5 +160,11 @@ button:focus{
 }
 .fib:hover{
     background: #ff6659;
-    box-shadow: 0 3px 12px #00000061;
+    box-shadow: 0 6px 12px #00000061;
+}
+.message-to{
+    text-align: center;
+    border-radius: 32px;
+    width: 256px;
+    background: #a0a0a0
 }

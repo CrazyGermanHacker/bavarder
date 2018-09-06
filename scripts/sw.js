@@ -1,6 +1,7 @@
 var CACHE_NAME = 'bavardercsh-2';
 var urlsToCache = [
   '/',
+  '/settings',
   '/material.css',
   '/bavarder.js'
 ];

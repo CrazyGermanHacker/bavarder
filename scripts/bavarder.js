@@ -50,13 +50,6 @@ function back_add_chat_action(){
     document.getElementsByClassName("add_chat_screen")[0].style.bottom="-100%";
     document.getElementById("unameip").value="";
 }
-function chat_action(name){
-    document.getElementById("user").innerHTML=name;
-    document.getElementsByClassName("chat_screen")[0].style.right="0%";
-}
-function back_chat_action(){
-    document.getElementsByClassName("chat_screen")[0].style.right="-100%";
-}
 function osc(x,y){
     if (document.getElementsByClassName("scroll")[x].scrollTop==0) {
         document.getElementsByClassName("hd")[y].style.boxShadow="#000000 0 0 0"

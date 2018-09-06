@@ -1,7 +1,9 @@
-$def with(users)
+$def with(users, messages, wtg)
 <div class="hd wrapper3">
     <div style="text-align: left;">
-        <button style="background: white; border: 0 none; color: black; box-shadow: 0 0 0 white; padding: 0; margin: 0;"  onclick="show_signin_card()"><i class="material-icons" style="font-size: 32px;">person</i></button>
+        <button style="background: #fafafa; border: 0 none; color: black; box-shadow: 0 0 0 white; padding: 0; margin: 0;"  onclick="show_signin_card()">
+            <i class="material-icons" style="font-size: 32px;">person</i>
+        </button>
         <div  style="left: 16px; position: fixed; display: none; top: 48px" id="gsignininfo">
             <div class="g-signin2" data-onsuccess="onSignIn" data-theme="light"></div>
         </div>
@@ -9,8 +11,13 @@ $def with(users)
     <h2 style="text-align: center;">Bavarder</h2>
     <div style="text-align: right;">
         <i class="material-icons" style="font-size: 32px;" onclick="show_info_cards()">more_vert</i>
-        <div class="info" id="info" onclick="window.location.href = 'https://github.com/storm246/bavarder'">
-            Visit Github
+        <div class="info" id="info">
+            <div id="info0">
+                <a href="/settings">Settings</a>
+            </div>
+            <div id="info1" onclick="window.location.href = 'https://github.com/storm246/bavarder'">
+                Visit Github
+            </div>
         </div>
     </div>
 </div>
@@ -43,14 +50,20 @@ $def with(users)
     <div class="hd">
         <h2><i class="material-icons" style="font-size: 32px" onclick="back_chat_action()">arrow_back</i><b id="user"></b></h2>
     </div>
+    $for x in range(len(messages)):
+        <div class="message-to">$messages[x]</div>
     <div class="wrappermsg">
         <div class="messagebar">
-            <input type="text" style="border: 0 none; margin-top: 12px;" placeholder="Message" />
-            <form id="messagefield">
+            <form id="messagefield" action="/sendmsg" method="POST">
+                <input type="text" name="message" id="messagefld" style="border: 0 none; margin-top: 12px; font-size: 16px; border-radius: 16px; width: 100%;" placeholder="Message" />
             </form>
         </div>
         <div class="fib">
-            <i class="material-icons" style="font-size: 32px">send</i>
+            <i class="material-icons" style="font-size: 32px" onclick="waittosend()">send</i>
         </div>
     </div>
 </div>
+$if wtg!="":
+    <script>
+        chat_action('$wtg')
+    </script>
