@@ -10,6 +10,9 @@ handlers:
 - url: /material.css
   static_files: stylesheets/material.css
   upload: stylesheets/material.css
+- url: /toggle-md.css
+  static_files: stylesheets/toggle-md.css
+  upload: stylesheets/toggle-md.css
 - url: /manifest.webmanifest
   static_files: static/manifest.webmanifest
   upload: static/manifest.webmanifest

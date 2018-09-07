@@ -71,6 +71,26 @@ function show_signin_card() {
         document.getElementById("gsignininfo").style.display= "none";
     }
 }
+function toggledark(){
+    if (document.getElementById("darktoggle").checked==true){
+        document.body.style.color="white"
+        document.body.style.background="#000000f3"
+        for (var i = 0; i<=document.getElementsByClassName("card").length-1; i++){ document.getElementsByClassName("card")[i].style.background="#000000ef"; }
+        for (var i = 0; i<=document.getElementsByClassName("hdiconbtn").length-1; i++){ 
+            document.getElementsByClassName("hdiconbtn")[i].style.background="rgba(0,0,0,0.00)";
+            document.getElementsByClassName("hdiconbtn")[i].style.color="white"; 
+        }
+    }
+    else {
+        document.body.style.color="black"
+        document.body.style.background="#fafafa"
+        for (var i = 0; i<=document.getElementsByClassName("card").length-1; i++){ document.getElementsByClassName("card")[i].style.background="#ffffff"; }
+        for (var i = 0; i<=document.getElementsByClassName("hdiconbtn").length-1; i++){ 
+            document.getElementsByClassName("hdiconbtn")[i].style.background="#ffffff";
+            document.getElementsByClassName("hdiconbtn")[i].style.color="black";
+        }
+    }
+}
 function onSignIn(googleUser){
         // Useful data for your client-side scripts:
     var profile = googleUser.getBasicProfile();

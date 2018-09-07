@@ -3,3 +3,4 @@ appengine_config*
 .vscode/
 *.pyc
 __init__*
+node_modules/
