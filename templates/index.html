@@ -1,20 +1,18 @@
-$def with(users, messages, wtg)
+$def with(users, messages, wtg, prefs)
 <div class="hd wrapper3">
     <div style="text-align: left;">
-        <button style="background: white; border: 0 none; color: black; box-shadow: 0 0 0 white; padding: 0; margin: 0;"  onclick="show_signin_card()">
+        <button class="hdiconbtn" style="background: white; border: 0 none; color: black; box-shadow: 0 0 0 white; padding: 0; margin: 0;"  onclick="show_signin_card()">
             <i class="material-icons" style="font-size: 32px;">person</i>
         </button>
         <div  style="left: 16px; position: fixed; display: none; top: 48px" id="gsignininfo">
-            <div class="g-signin2" data-onsuccess="onSignIn" data-theme="light"></div>
+            <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
         </div>
     </div>
     <h2 style="text-align: center;">Bavarder</h2>
     <div style="text-align: right;">
         <i class="material-icons" style="font-size: 32px;" onclick="show_info_cards()">more_vert</i>
         <div class="info" id="info">
-            <div id="info0">
-                <a href="/settings">Settings</a>
-            </div>
+            <div id="info0" onclick="opensettings()">Settings</div>
             <div id="info1" onclick="window.location.href = 'https://github.com/storm246/bavarder'">
                 Visit Github
             </div>
@@ -32,7 +30,7 @@ $def with(users, messages, wtg)
         </div>
 </div>
 
-<div class="add_chat_screen">
+<div class="add_chat_screen action">
     <div class="hd">
         <h2><i class="material-icons" style="font-size: 32px" onclick="back_add_chat_action()">arrow_back</i>Add Chat</h2>
     </div>
@@ -46,7 +44,32 @@ $def with(users, messages, wtg)
     </div>
 </div>
 
-<div class="chat_screen">
+<div class="settings_screen action">
+    <div class="hd">
+        <h2><i class="material-icons" style="font-size: 32px" onclick="back_settings_action()">arrow_back</i>Settings</h2>
+    </div>
+    <div class="scroll" id="settings_main">
+        <div class="card" id="settings-general">
+            <h3>General</h3>
+            <br />
+            <form action="/changesetting" method="POST">
+                <div>
+                    <label>Enable Dark Theme
+                        <input class="simple-switch-input" id="darktoggle" name="dark" type="checkbox"/><span class="simple-switch dark"></span>
+                    </label>
+                </div>
+                <input type="hidden" name="email" id="emailform" />
+                <br />
+                <button type="submit" id="applybutton" style="color: white; background: #d32f2f"><b>APPLY</b></button>
+            </form>
+        </div>
+    </div>
+    <div class="card" id="signinmsg">
+        <h3>You must be signed in to change settings.</h3>
+    </div>
+</div>
+
+<div class="chat_screen action">
     <div class="hd">
         <h2><i class="material-icons" style="font-size: 32px" onclick="back_chat_action()">arrow_back</i><b id="user"></b></h2>
     </div>
@@ -55,7 +78,7 @@ $def with(users, messages, wtg)
     <div class="wrappermsg">
         <div class="messagebar">
             <form id="messagefield" action="/sendmsg" method="POST">
-                <input type="text" name="message" id="messagefld" style="border: 0 none; margin-top: 12px; font-size: 16px; border-radius: 16px; width: 100%;" placeholder="Message" />
+                <input type="text" name="message" id="messagefld" style="border: 0 none; margin-top: 8px; font-size: 16px; border-radius: 16px; width: 100%;" placeholder="Message" />
             </form>
         </div>
         <div class="fib">
@@ -63,6 +86,30 @@ $def with(users, messages, wtg)
         </div>
     </div>
 </div>
+<script>
+        function onSignIn(googleUser){
+                // Useful data for your client-side scripts:
+            var profile = googleUser.getBasicProfile();
+            console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+            console.log('Full Name: ' + profile.getName());
+            console.log('Given Name: ' + profile.getGivenName());
+            console.log('Family Name: ' + profile.getFamilyName());
+            console.log("Image URL: " + profile.getImageUrl());
+            console.log("Email: " + profile.getEmail());
+    
+            // The ID token you need to pass to your backend:
+            var id_token = googleUser.getAuthResponse().id_token;
+            console.log("ID Token: " + id_token);
+            document.getElementById("settings_main").style.display="inline-block";
+            document.getElementById("emailform").value=profile.getEmail()
+            document.getElementById("signinmsg").style.display="none";
+            $for x in range(0, len(prefs)):
+                if (profile.getEmail()=="$prefs[x].user"){
+                    $if prefs[x].dark_theme==True:
+                        toggledark()
+                }
+        };
+    </script>
 $if wtg!="":
     <script>
         chat_action('$wtg')

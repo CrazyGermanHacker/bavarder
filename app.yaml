@@ -5,7 +5,7 @@ threadsafe: true
 handlers:
 - url: /
   script: bavarder.app
-- url: /settings
+- url: /changesetting
   script: bavarder.app
 - url: /material.css
   static_files: stylesheets/material.css
@@ -28,6 +28,9 @@ handlers:
 - url: /msgscreen.js
   static_files: scripts/msgscreen.js
   upload: scripts/msgscreen.js
+- url: /settings.js
+  static_files: scripts/settings.js
+  upload: scripts/settings.js
 - url: /favicon.ico
   static_files: static/favicon.ico
   upload: static/favicon.ico
