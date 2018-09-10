@@ -10,7 +10,9 @@ function sendpushed(){
 }
 async function waittosend(){
     await sendpushed().then(function(message){
-        document.getElementById("messagefield").submit()
+        var request = new XMLHttpRequest()
+        request.open("POST", "/sendmsg", true)
+        request.send(new FormData(document.getElementById("mmessagefield")))
     })
 }
 function chat_action(name){

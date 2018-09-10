@@ -1,4 +1,4 @@
-$def with(users, messages, wtg, prefs)
+$def with(messages, wtg, prefs)
 <div class="hd wrapper3">
     <div style="text-align: left;">
         <button class="hdiconbtn" style="background: #fafafa; border: 0 none; color: black; box-shadow: 0 0 0 white; padding: 0; margin: 0;"  onclick="show_signin_card()">
@@ -24,10 +24,7 @@ $def with(users, messages, wtg, prefs)
     <div class="chatbutton" style="color: #d32f2f; text-align: center;" onclick="add_chat_action()">
         <h3><i class="material-icons" style="font-size: 32px">add_circle</i>Add Chat</h3>
     </div>
-    $for x in range(len(users)):
-        <div class="chatbutton" style="text-align: center;" onclick="chat_action('$users[x]')">
-            <h3>$users[x]</h3>
-        </div>
+    <div id="users"></div>
 </div>
 
 <div class="add_chat_screen action">
@@ -35,12 +32,14 @@ $def with(users, messages, wtg, prefs)
         <h2><i class="material-icons" style="font-size: 32px" onclick="back_add_chat_action()">arrow_back</i>Add Chat</h2>
     </div>
     <div class="card">
+        <br />
         <form id="add_form" action="/" method="POST">
             <input type="text" name="user" placeholder="username" id="unameip" />
+            <input type="hidden" name="email" id="email"/>
             <br />
             <br />
+            <button type="submit" id="add_btn" style="background: lightgrey; color: black" disabled><b>ADD</b></button>
         </form>
-        <button id="add_btn" style="background: lightgrey; color: black" onclick="sub_add_form()" disabled><b>ADD</b></button>
     </div>
 </div>
 
@@ -102,6 +101,7 @@ $def with(users, messages, wtg, prefs)
             console.log("ID Token: " + id_token);
             document.getElementById("settings_main").style.display="inline-block";
             document.getElementById("emailform").value=profile.getEmail()
+            document.getElementById("email").value=profile.getEmail()
             document.getElementById("signinmsg").style.display="none";
             $for x in range(0, len(prefs)):
                 if (profile.getEmail()=="$prefs[x].user"){

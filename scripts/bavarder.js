@@ -38,9 +38,6 @@ async function allowbtnclick(){
     })
 }
 
-function sub_add_form(){
-    document.getElementById("add_form").submit();
-}
 function opensettings(){
     document.getElementsByClassName("settings_screen")[0].style.left="0%";
 }

@@ -9,8 +9,7 @@ urls=(
 
 app=web.application(urls, globals())
 render=web.template.render("templates/", base="layout")
-users = []
-messages= []
+messages=[]
 
 class msg(ndb.Model):
     emailto=ndb.StringProperty()
@@ -20,6 +19,7 @@ class msg(ndb.Model):
 class user(ndb.Model):
     user=ndb.StringProperty()
     dark_theme=ndb.BooleanProperty()
+    contacts=ndb.StringProperty(repeated=True)
 
 class index:
     def GET(self):
@@ -27,11 +27,19 @@ class index:
         q=user.query()
         results=q.fetch()
 
-        return render.index(users, messages, x.wtg, prefs=results)
+        return render.index(messages, x.wtg, prefs=results)
 
     def POST(self):
         x=web.input()
-        users.append(x.user)
+        q=user.query()
+        results=q.fetch()
+
+        for y in range(len(results)):
+            if results[y].user==x.email:
+                usr=results[y].key.get()
+                usr.contacts.append(x.user)
+                usr.put()
+
         return '<head><meta http-equiv="refresh" content="0; url=/" /></head>'
 
 class msg:
@@ -49,7 +57,7 @@ class set:
             f=x.dark
             dtheme=True
         except:
-            dtheme=False  
+            dtheme=False
         for y in range(len(results)):
             if (results[y].user==x.email):
                 users=results[y].key.get()
