@@ -12,6 +12,11 @@ render=web.template.render("templates/", base="layout")
 users = []
 messages= []
 
+class msg(ndb.Model):
+    emailto=ndb.StringProperty()
+    emailfrom=ndb.StringProperty()
+    message=ndb.StringProperty()
+
 class user(ndb.Model):
     user=ndb.StringProperty()
     dark_theme=ndb.BooleanProperty()
