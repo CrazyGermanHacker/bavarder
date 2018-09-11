@@ -107,6 +107,8 @@ $def with(messages, wtg, prefs)
                 if (profile.getEmail()=="$prefs[x].user"){
                     $if prefs[x].dark_theme==True:
                         toggledark()
+                    $for y in range(0,len(prefs[x].contacts)):
+                        document.getElementById("users").innerHTML+='<div class="chatbutton" style="text-align: center" onclick="chat_action(\'$prefs[x].contacts[y]\')" id="$prefs[x].contacts[y]">$prefs[x].contacts[y]</div>'
                 }
         };
     </script>
