@@ -1,4 +1,5 @@
 import web
+import json
 from google.appengine.ext import ndb
 
 urls=(
@@ -45,8 +46,8 @@ class index:
 class msg:
     def POST(self):
         x=web.input()
-        messages.append(x.message)
-        return '<head><meta http-equiv="refresh" content="0; url=/?wtg=f" /></head>'
+        
+        return json.dumps({'from':x.email,'to':x.to, 'msg':x.message})
 
 class set:
     def POST(self):

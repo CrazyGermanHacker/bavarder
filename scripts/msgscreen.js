@@ -1,3 +1,7 @@
+function sendfinished(){
+    var jsparsed = JSON.parse(this.responseText)
+    console.log(jsparsed.msg)
+}
 function sendpushed(){
     return new Promise((resolve, reject) => {
         if (document.getElementById("messagefld").value!="") {
@@ -11,12 +15,16 @@ function sendpushed(){
 async function waittosend(){
     await sendpushed().then(function(message){
         var request = new XMLHttpRequest()
-        request.open("POST", "/sendmsg", true)
-        request.send(new FormData(document.getElementById("mmessagefield")))
+        request.open("POST", "/sendmsg", async=true)
+        request.addEventListener("load", sendfinished)
+        var f = document.getElementById("messagefield")
+        var fd = new FormData(f)
+        request.send(fd)
     })
 }
 function chat_action(name){
     document.getElementById("user").innerHTML=name;
+    document.getElementById("toform").value=name;
     document.getElementsByClassName("chat_screen")[0].style.transition="0";
     document.getElementsByClassName("chat_screen")[0].style.right="0%";
     document.getElementsByClassName("chat_screen")[0].style.transition="all 0.3s cubic-bezier(.25,.8,.25,1)";

@@ -72,12 +72,12 @@ $def with(messages, wtg, prefs)
     <div class="hd">
         <h2><i class="material-icons" style="font-size: 32px" onclick="back_chat_action()">arrow_back</i><b id="user"></b></h2>
     </div>
-    $for x in range(len(messages)):
-        <div class="message-to">$messages[x]</div>
     <div class="wrappermsg">
         <div class="messagebar">
-            <form id="messagefield" action="/sendmsg" method="POST">
+            <form id="messagefield">
                 <input type="text" name="message" id="messagefld" style="border: 0 none; margin-top: 8px; font-size: 16px; border-radius: 16px; width: 100%;" placeholder="Message" />
+                <input type="hidden" name="email" id="emailform2" />
+                <input type="hidden" name="to" id="toform" />
             </form>
         </div>
         <div class="fib">
@@ -101,6 +101,7 @@ $def with(messages, wtg, prefs)
             console.log("ID Token: " + id_token);
             document.getElementById("settings_main").style.display="inline-block";
             document.getElementById("emailform").value=profile.getEmail()
+            document.getElementById("emailform2").value=profile.getEmail()
             document.getElementById("email").value=profile.getEmail()
             document.getElementById("signinmsg").style.display="none";
             $for x in range(0, len(prefs)):
