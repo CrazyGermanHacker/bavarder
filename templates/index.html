@@ -1,7 +1,7 @@
 $def with(messages, wtg, prefs)
 <div class="hd wrapper3">
     <div style="text-align: left;">
-        <button class="hdiconbtn" style="background: #fafafa; border: 0 none; color: black; box-shadow: 0 0 0 white; padding: 0; margin: 0;"  onclick="show_signin_card()">
+        <button class="hdiconbtn" id="signinbtn" style="background: #fafafa; border: 0 none; color: black; box-shadow: 0 0 0 white; padding: 0; margin: 0;"  onclick="show_signin_card()">
             <i class="material-icons" style="font-size: 32px;">person</i>
         </button>
         <div  style="left: 16px; position: fixed; display: none; top: 48px" id="gsignininfo">
@@ -72,6 +72,9 @@ $def with(messages, wtg, prefs)
     <div class="hd">
         <h2><i class="material-icons" style="font-size: 32px" onclick="back_chat_action()">arrow_back</i><b id="user"></b></h2>
     </div>
+    <div id="messages">
+
+    </div>
     <div class="wrappermsg">
         <div class="messagebar">
             <form id="messagefield">
@@ -104,6 +107,7 @@ $def with(messages, wtg, prefs)
             document.getElementById("emailform2").value=profile.getEmail()
             document.getElementById("email").value=profile.getEmail()
             document.getElementById("signinmsg").style.display="none";
+            document.getElementById("signinbtn").innerHTML="<img src="+profile.getImageUrl()+" style='width: 32; margin-left=8px; border-radius: 16px'>"
             $for x in range(0, len(prefs)):
                 if (profile.getEmail()=="$prefs[x].user"){
                     $if prefs[x].dark_theme==True:

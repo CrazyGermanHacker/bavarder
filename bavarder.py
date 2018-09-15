@@ -4,7 +4,7 @@ from google.appengine.ext import ndb
 
 urls=(
     "/", "index",
-    "/sendmsg", "msg",
+    "/sendmsg", "sendmsg",
     "/changesetting", "set"
 )
 
@@ -43,10 +43,13 @@ class index:
 
         return '<head><meta http-equiv="refresh" content="0; url=/" /></head>'
 
-class msg:
+class sendmsg:
     def POST(self):
         x=web.input()
-        
+        message_key = msg(
+            emailto=x.to, emailfrom=x.email, message=x.message 
+        )
+        message_key.put()
         return json.dumps({'from':x.email,'to':x.to, 'msg':x.message})
 
 class set:
