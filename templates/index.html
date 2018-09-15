@@ -107,7 +107,7 @@ $def with(messages, wtg, prefs)
             document.getElementById("emailform2").value=profile.getEmail()
             document.getElementById("email").value=profile.getEmail()
             document.getElementById("signinmsg").style.display="none";
-            document.getElementById("signinbtn").innerHTML="<img src="+profile.getImageUrl()+" style='width: 32; margin-left=8px; border-radius: 16px'>"
+            document.getElementById("signinbtn").innerHTML="<img src="+profile.getImageUrl()+" style='width: 32; margin-left: 8px; border-radius: 16px'>"
             $for x in range(0, len(prefs)):
                 if (profile.getEmail()=="$prefs[x].user"){
                     $if prefs[x].dark_theme==True:
