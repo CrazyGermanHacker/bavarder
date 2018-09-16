@@ -6,6 +6,7 @@ urls=(
     "/", "index",
     "/sendmsg", "sendmsg",
     "/user","grabcontacts",
+    "/rscvmsgs", "grabmessages",
     "/changesetting", "set"
 )
 
@@ -69,6 +70,28 @@ class grabcontacts:
 
 
         return json.dumps({"contacts":usercontacts, "dark":darktheme})
+
+class grabmessages:
+    def POST(self):
+        x=web.input()
+        q=msg.query()
+        results=q.fetch()
+        messagesto=[]
+        messagesfrom=[]
+
+        for y in range(len(results)):
+            if (results[y].emailto==x.to):
+                messagesto.append(results[y].message)
+            if (results[y].emailfrom==x.to):
+                messagesfrom.append(results[y].message)
+
+        count=len(messagesto)+len(messagesfrom)
+
+        print count, int(x.messagecount)
+        if count!=int(x.messagecount) or count==0:
+            return json.dumps({"to":messagesto, "from":messagesfrom})
+        else:
+            return "false"
 
 class set:
     def POST(self):
