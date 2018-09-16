@@ -9,6 +9,8 @@ handlers:
   script: bavarder.app
 - url: /sendmsg
   script: bavarder.app
+- url: /user
+  script: bavarder.app
 - url: /material.css
   static_files: stylesheets/material.css
   upload: stylesheets/material.css

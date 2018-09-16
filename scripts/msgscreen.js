@@ -1,6 +1,6 @@
 function sendfinished(){
     var jsparsed = JSON.parse(this.responseText)
-    document.getElementById("messages").innerHTML+="<div style='text-align: right'><div class='message-to'>"+jsparsed.msg+"</div></div>"
+    document.getElementById("messages").innerHTML+="<div class='wrapper3'><div></div><div></div><div class='card'>"+jsparsed.msg+"</div></div>"
 }
 function sendpushed(){
     return new Promise((resolve, reject) => {

@@ -38,6 +38,28 @@ async function allowbtnclick(){
     })
 }
 
+function getusersettings(email){
+    var request = new XMLHttpRequest()
+    request.open("POST", "/user", async=true)
+    request.addEventListener("load", function() {
+        var prs = JSON.parse(this.responseText)
+        console.log(prs)
+        if (prs.dark==true){
+            toggledark()
+        }
+        for (var x = 0; x<=prs.contacts.length-1; x++){
+            var contact=prs.contacts[x]
+            document.getElementById("users").innerHTML+='<div class="chatbutton" style="text-align: center" onclick="chat_action(\''+contact+'\')" id="'+contact+'">'+contact+'</div>'
+        }
+    })
+
+    var f = document.getElementById("add_form")
+    var em = new FormData(f)
+
+    request.send(em)
+
+}
+
 function opensettings(){
     document.getElementsByClassName("settings_screen")[0].style.left="0%";
 }

@@ -38,7 +38,7 @@ button{
     font-family: 'Poppins', sans-serif;
     border: none;
     border-radius: 4px;
-    box-shadow: 0 2px 2px #00000061;
+    box-shadow: 0 1px 2px #00000061;
     padding: 4px;
     padding-right: 16px;
     padding-left: 16px;
@@ -163,12 +163,6 @@ button:focus{
 .fib:hover{
     background: #ff6659;
     box-shadow: 0 6px 12px #00000061;
-}
-.message-to{
-    text-align: center;
-    border-radius: 32px;
-    width: 256px;
-    background: #a0a0a0
 }
 .action{
     background: #fafafa;

@@ -5,6 +5,7 @@ from google.appengine.ext import ndb
 urls=(
     "/", "index",
     "/sendmsg", "sendmsg",
+    "/user","grabcontacts",
     "/changesetting", "set"
 )
 
@@ -24,11 +25,11 @@ class user(ndb.Model):
 
 class index:
     def GET(self):
-        x=web.input(wtg="")
+        x=web.input()
         q=user.query()
         results=q.fetch()
 
-        return render.index(messages, x.wtg, prefs=results)
+        return render.index(messages)
 
     def POST(self):
         x=web.input()
@@ -51,6 +52,23 @@ class sendmsg:
         )
         message_key.put()
         return json.dumps({'from':x.email,'to':x.to, 'msg':x.message})
+
+class grabcontacts:
+    def POST(self):
+        x=web.input()
+        q=user.query()
+        results=q.fetch()
+        usercontacts=[]
+        darktheme=False
+
+        for y in range(len(results)):
+            if results[y].user==x.email:
+                usercontacts=results[y].contacts
+                if results[y].dark_theme==True:
+                    darktheme=True
+
+
+        return json.dumps({"contacts":usercontacts, "dark":darktheme})
 
 class set:
     def POST(self):
