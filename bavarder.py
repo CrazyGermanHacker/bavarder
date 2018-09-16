@@ -12,7 +12,6 @@ urls=(
 
 app=web.application(urls, globals())
 render=web.template.render("templates/", base="layout")
-messages=[]
 
 class msg(ndb.Model):
     emailto=ndb.StringProperty()
@@ -22,15 +21,14 @@ class msg(ndb.Model):
 class user(ndb.Model):
     user=ndb.StringProperty()
     dark_theme=ndb.BooleanProperty()
+    noir=ndb.BooleanProperty()
     contacts=ndb.StringProperty(repeated=True)
 
 class index:
     def GET(self):
         x=web.input()
-        q=user.query()
-        results=q.fetch()
 
-        return render.index(messages)
+        return render.index()
 
     def POST(self):
         x=web.input()
@@ -61,15 +59,18 @@ class grabcontacts:
         results=q.fetch()
         usercontacts=[]
         darktheme=False
+        oleddarktheme=False
 
         for y in range(len(results)):
             if results[y].user==x.email:
                 usercontacts=results[y].contacts
                 if results[y].dark_theme==True:
                     darktheme=True
+                if results[y].noir==True:
+                    oleddarktheme=True
 
 
-        return json.dumps({"contacts":usercontacts, "dark":darktheme})
+        return json.dumps({"contacts":usercontacts, "dark":darktheme, "oleddark":oleddarktheme})
 
 class grabmessages:
     def POST(self):
@@ -103,15 +104,21 @@ class set:
             dtheme=True
         except:
             dtheme=False
+        try:
+            f2=x.noirmode
+            noirtheme=True
+        except:
+            noirtheme=False
         for y in range(len(results)):
             if (results[y].user==x.email):
                 users=results[y].key.get()
                 users.dark_theme=dtheme
+                users.noir=noirtheme
                 users.put()
                 return '<head><meta http-equiv="refresh" content="0; url=/" /></head>'
 
         userset = user(
-            user=x.email, dark_theme=dtheme
+            user=x.email, dark_theme=dtheme, noir=noirtheme
         )
         set_key = userset.put()
         return '<head><meta http-equiv="refresh" content="0; url=/" /></head>'

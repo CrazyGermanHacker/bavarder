@@ -1,4 +1,3 @@
-$def with(messages,)
 <div class="hd wrapper3">
     <div style="text-align: left;">
         <button class="hdiconbtn" id="signinbtn" style="background: white; border: 0 none; color: black; box-shadow: 0 0 0 white; padding: 0; margin: 0;"  onclick="show_signin_card()">
@@ -53,8 +52,13 @@ $def with(messages,)
             <br />
             <form action="/changesetting" method="POST">
                 <div>
+                    <h5>Theme</h5>
                     <label>Enable Dark Theme
                         <input class="simple-switch-input" id="darktoggle" name="dark" type="checkbox"/><span class="simple-switch dark"></span>
+                    </label>
+                    <br />
+                    <label>Use Noir Mode (Deeper blacks; Saves power on devices with OLED and AMOLED screens)
+                        <input class="simple-switch-input" id="noirmode" name="noirmode" type="checkbox"/><span class="simple-switch dark"></span>
                     </label>
                 </div>
                 <input type="hidden" name="email" id="emailform" />
