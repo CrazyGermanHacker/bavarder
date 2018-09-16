@@ -3,7 +3,9 @@ function sendfinished(){
     document.getElementById("messagefld").value="";
     document.getElementById("messages").innerHTML+=
         "<div class='wrapper3'><div></div><div></div><div class='card' style='border-radius:16px'>"+jsparsed.msg+"</div></div>";
-    toggledark()
+        if (document.getElementById("darktoggle").checked==true){
+            toggledark()
+        }
 }
 function sendpushed(){
     return new Promise((resolve, reject) => {
@@ -33,16 +35,21 @@ function recieve(){
         if (this.responseText!="false"){
             var messages=JSON.parse(this.responseText)
             document.getElementById("messages").innerHTML="";
-            for (var i = 0; i<=messages.from.length-1; i++){
-                document.getElementById("messages").innerHTML+=
-                "<div class='wrapper3'><div></div><div></div><div class='card' style='border-radius:16px'>"+messages.from[i]+"</div></div>";
-                toggledark()
-            }
             for (var i = 0; i<=messages.to.length-1; i++){
                 document.getElementById("messages").innerHTML+=
-                "<div class='wrapper3'><div class='card' style='border-radius:16px'>"+messages.to[i]+"</div><div></div><div></div></div>";
-                toggledark()
+                "<div class='wrapper3'><div></div><div></div><div class='card' style='border-radius:16px'>"+messages.to[i]+"</div></div>";
+                if (document.getElementById("darktoggle").checked==true){
+                    toggledark()
+                }
             }
+            for (var i = 0; i<=messages.from.length-1; i++){
+                document.getElementById("messages").innerHTML+=
+                "<div class='wrapper3'><div class='card' style='border-radius:16px'>"+messages.from[i]+"</div><div></div><div></div></div>";
+                if (document.getElementById("darktoggle").checked==true){
+                    toggledark()
+                }
+            }
+            document.getElementById("messages").scrollTop=document.getElementById("messages").scrollHeight
         }
     })
     var f = document.getElementById("messagefield")
@@ -59,6 +66,8 @@ function recieve(){
 
 function chat_action(name){
     document.getElementById("messages").innerHTML="";
+    document.getElementById("messages").style.bottom=document.getElementsByClassName("wrappermsg")[0].height;
+    document.getElementById("messages").style.top=48;
     document.getElementById("user").innerHTML=name;
     document.getElementById("toform").value=name;
     document.getElementsByClassName("chat_screen")[0].style.transition="0";
@@ -71,16 +80,21 @@ function chat_action(name){
         console.log(
             messages
         )
-        for (var i = 0; i<=messages.from.length-1; i++){
-            document.getElementById("messages").innerHTML+=
-            "<div class='wrapper3'><div></div><div></div><div class='card' style='border-radius:16px'>"+messages.from[i]+"</div></div>";
-            toggledark()
-        }
         for (var i = 0; i<=messages.to.length-1; i++){
             document.getElementById("messages").innerHTML+=
-            "<div class='wrapper3'><div class='card' style='border-radius:16px'>"+messages.to[i]+"</div><div></div><div></div></div>";
-            toggledark()
+            "<div class='wrapper3'><div></div><div></div><div class='card' style='border-radius:16px'>"+messages.to[i]+"</div></div>";
+            if (document.getElementById("darktoggle").checked==true){
+                toggledark()
+            }
         }
+        for (var i = 0; i<=messages.from.length-1; i++){
+            document.getElementById("messages").innerHTML+=
+            "<div class='wrapper3'><div class='card' style='border-radius:16px'>"+messages.from[i]+"</div><div></div><div></div></div>";
+            if (document.getElementById("darktoggle").checked==true){
+                toggledark()
+            }
+        }
+        document.getElementById("messages").scrollTop="0"
     })
     document.getElementById("messagecount").value=document.getElementById("messages").children.length
     var f = document.getElementById("messagefield")

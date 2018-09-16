@@ -1,7 +1,7 @@
 $def with(messages,)
 <div class="hd wrapper3">
     <div style="text-align: left;">
-        <button class="hdiconbtn" id="signinbtn" style="background: #fafafa; border: 0 none; color: black; box-shadow: 0 0 0 white; padding: 0; margin: 0;"  onclick="show_signin_card()">
+        <button class="hdiconbtn" id="signinbtn" style="background: white; border: 0 none; color: black; box-shadow: 0 0 0 white; padding: 0; margin: 0;"  onclick="show_signin_card()">
             <i class="material-icons" style="font-size: 32px;">person</i>
         </button>
         <div  style="left: 16px; position: fixed; display: none; top: 48px" id="gsignininfo">
@@ -72,20 +72,20 @@ $def with(messages,)
     <div class="hd">
         <h2><i class="material-icons" style="font-size: 32px" onclick="back_chat_action()">arrow_back</i><b id="user"></b></h2>
     </div>
-    <div id="messages">
+    <div id="messages" class="scroll">
 
     </div>
     <div class="wrappermsg">
         <div class="messagebar">
             <form id="messagefield" autocomplete="off">
-                <input type="text" name="message" id="messagefld" style="border: 0 none; margin-top: 8px; font-size: 16px; border-radius: 16px; width: 100%;" placeholder="Message" />
+                <input type="text" name="message" id="messagefld" style="border: 0 none; margin-top: 8px; font-size: 16px; border-radius: 24px; width: 100%; box-shadow: 0 6px 12px #00000061; padding-top: 12px; padding-bottom: 12px; padding-left: 4px;" placeholder="Message" />
                 <input type="hidden" name="email" id="emailform2" />
                 <input type="hidden" name="to" id="toform" />
                 <input name="messagecount" id="messagecount" type="hidden"/>
             </form>
         </div>
-        <div class="fib">
-            <i class="material-icons" style="font-size: 32px" onclick="waittosend()">send</i>
+        <div class="fib"  onclick="waittosend()">
+            <i class="material-icons" style="font-size: 32px">send</i>
         </div>
     </div>
 </div>

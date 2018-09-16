@@ -80,9 +80,9 @@ class grabmessages:
         messagesfrom=[]
 
         for y in range(len(results)):
-            if (results[y].emailto==x.to):
+            if (results[y].emailto==x.to) and (results[y].emailfrom==x.email):
                 messagesto.append(results[y].message)
-            if (results[y].emailfrom==x.to):
+            if (results[y].emailfrom==x.to)and (results[y].emailto==x.email):
                 messagesfrom.append(results[y].message)
 
         count=len(messagesto)+len(messagesfrom)
