@@ -81,11 +81,12 @@
     </div>
     <div class="wrappermsg">
         <div class="messagebar">
-            <form id="messagefield" autocomplete="off">
+            <form id="messagefield" onkeypress="return event.keyCode != 13;" autocomplete="off">
                 <input type="text" name="message" id="messagefld" style="border: 0 none; margin-top: 8px; font-size: 16px; border-radius: 24px; width: 100%; box-shadow: 0 6px 12px #00000061; padding-top: 12px; padding-bottom: 12px; padding-left: 4px;" placeholder="Message" />
                 <input type="hidden" name="email" id="emailform2" />
                 <input type="hidden" name="to" id="toform" />
-                <input name="messagecount" id="messagecount" type="hidden"/>
+                <input type="hidden" id="lastnumber" name="lastnumber" value="-1" />
+                <input name="messagecount" id="messagecount" type="hidden" />
             </form>
         </div>
         <div class="fib"  onclick="waittosend()">

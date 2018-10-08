@@ -31,13 +31,17 @@ async function waittosend(){
 function recieve(){
     request = new XMLHttpRequest()
     request.open("POST", "/rscvmsgs", async=true)
+
     request.addEventListener("load", function(){
         if (this.responseText!="false"){
             var messages=JSON.parse(this.responseText)
+
+            document.getElementById("lastnumber").value=messages.lastnum
+            
             document.getElementById("messages").innerHTML="";
             for (var i = 0; i<=messages.to.length-1; i++){
                 document.getElementById("messages").innerHTML+=
-                "<div class='wrapper3'><div></div><div></div><div class='card' style='border-radius:16px'>"+messages.to[i]+"</div></div>";
+                    "<div class='wrapper3'><div></div><div></div><div class='card' style='border-radius:16px'>"+messages.to[i]+"</div></div>";
                 if (document.getElementById("darktoggle").checked==true){
                     toggledark()
                 }
@@ -52,10 +56,13 @@ function recieve(){
             document.getElementById("messages").scrollTop=document.getElementById("messages").scrollHeight
         }
     })
+
     var f = document.getElementById("messagefield")
     document.getElementById("messagecount").value=document.getElementById("messages").children.length
     var fd = new FormData(f)
+
     request.send(fd)
+
     if (document.getElementsByClassName("chat_screen")[0].style.right=="0%"){
         setTimeout( function(){
             recieve()
@@ -77,6 +84,7 @@ function chat_action(name){
     request.open("POST", "/rscvmsgs", async=true)
     request.addEventListener("load", function(){
         var messages=JSON.parse(this.responseText)
+        document.getElementById("lastnumber").value=messages.lastnum;
         console.log(
             messages
         )
