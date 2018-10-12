@@ -41,6 +41,13 @@ class index:
                 usr=results[y].key.get()
                 usr.contacts.append(x.user)
                 usr.put()
+                return '<head><meta http-equiv="refresh" content="0; url=/" /></head>'
+
+        userset = user(
+            user=x.email
+        )
+        userset.contacts.append(x.user)
+        set_key = userset.put()
 
         return '<head><meta http-equiv="refresh" content="0; url=/" /></head>'
 
@@ -86,19 +93,25 @@ class grabcontacts:
 class grabmessages:
     def POST(self):
         x=web.input()
-        q=msg.query(msg.emailto.IN([x.to, x.email]), msg.emailfrom.IN([x.to, x.email])).order(msg.number)
-        results=q.fetch()
+        try:
+            q=msg.query(
+                msg.emailto.IN([x.to, x.email]), 
+                msg.emailfrom.IN([x.to, x.email]),
+                msg.number>int(x.lastnumber)
+            ).order(msg.number).fetch()
+        except:
+            return "false"
         messagesto=[]
         messagesfrom=[]
         lastnum=int(x.lastnumber)
 
-        for y in range(len(results)):
-            if (results[y].emailto==x.to) and (results[y].emailfrom==x.email):
-                messagesto.append(results[y].message)
-                lastnum=results[y].number
-            if (results[y].emailfrom==x.to) and (results[y].emailto==x.email):
-                messagesfrom.append(results[y].message)
-                lastnum=results[y].number
+        for y in range(len(q)):
+            if (q[y].emailto==x.to):
+                messagesto.append(q[y].message)
+                lastnum=q[y].number
+            if (q[y].emailfrom==x.to):
+                messagesfrom.append(q[y].message)
+                lastnum=q[y].number
 
         count=len(messagesto)+len(messagesfrom)
 

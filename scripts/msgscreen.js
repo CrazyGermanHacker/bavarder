@@ -1,6 +1,7 @@
 function sendfinished(){
     var jsparsed = JSON.parse(this.responseText)
     document.getElementById("messagefld").value="";
+    document.getElementById("lastnumber").value = String(parseInt(document.getElementById("lastnumber").value)+1)
     document.getElementById("messages").innerHTML+=
         "<div class='wrapper3'><div></div><div></div><div class='card' style='border-radius:16px'>"+jsparsed.msg+"</div></div>";
         if (document.getElementById("darktoggle").checked==true){
@@ -35,10 +36,11 @@ function recieve(){
     request.addEventListener("load", function(){
         if (this.responseText!="false"){
             var messages=JSON.parse(this.responseText)
-
+            console.log(
+                messages
+            )
             document.getElementById("lastnumber").value=messages.lastnum
-            
-            document.getElementById("messages").innerHTML="";
+
             for (var i = 0; i<=messages.to.length-1; i++){
                 document.getElementById("messages").innerHTML+=
                     "<div class='wrapper3'><div></div><div></div><div class='card' style='border-radius:16px'>"+messages.to[i]+"</div></div>";
@@ -80,6 +82,7 @@ function chat_action(name){
     document.getElementsByClassName("chat_screen")[0].style.transition="0";
     document.getElementsByClassName("chat_screen")[0].style.right="0%";
     document.getElementsByClassName("chat_screen")[0].style.transition="all 0.3s cubic-bezier(.25,.8,.25,1)";
+    console.log(parseInt(document.getElementById("lastnumber").value))
     request = new XMLHttpRequest()
     request.open("POST", "/rscvmsgs", async=true)
     request.addEventListener("load", function(){
@@ -88,6 +91,7 @@ function chat_action(name){
         console.log(
             messages
         )
+        document.getElementById("messages").innerHTML=" "
         for (var i = 0; i<=messages.to.length-1; i++){
             document.getElementById("messages").innerHTML+=
             "<div class='wrapper3'><div></div><div></div><div class='card' style='border-radius:16px'>"+messages.to[i]+"</div></div>";
