@@ -184,10 +184,10 @@ button:focus{
     color: white;
     border-radius: 128px;
     position: fixed;
-    padding-top: 12px;
-    padding-bottom: 12px;
-    padding-left: 4px;
-    padding-right: 4px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 12px;
+    padding-right: 12px;
     bottom: 16px;
     right: 16px;
     box-shadow: 0 3px 6px #00000061;
@@ -197,7 +197,7 @@ button:focus{
     background: #ff6659;
 }
 .fab .material-icons{
-    font-size: 36px;
+    font-size: 24px;
 }
 .action{
     background: #fafafa;
