@@ -62,7 +62,7 @@ button:focus{
     overflow-y: auto;
     width: 100%;
     bottom: 0px;
-    top: 80px;
+    top: 0px;
     position: fixed;
     z-index: 0;
 }
@@ -106,14 +106,14 @@ button:focus{
 }
 .settings_screen{
     position: fixed;
-    left: -100%;
+    right: -105%;
     top: 0%;
     transition: all 0.25s cubic-bezier(.25,.8,.25,1);
 }
 .chat_screen{
     position: fixed;
     top: 0%;
-    right: -100%;
+    right: -105%;
     transition: all 0.25s cubic-bezier(.25,.8,.25,1);
 }
 .wrappermsg{
@@ -183,13 +183,15 @@ button:focus{
     background: #d32f2f;
     color: white;
     border-radius: 128px;
+    padding-top: 18px;
+    margin-right: -30px;
     position: fixed;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 12px;
-    padding-right: 12px;
-    bottom: 16px;
-    right: 16px;
+    right: 50%;
+    bottom: 28px;
+    padding-bottom: 18px;
+    width: max-content;
+    padding-left: 10px;
+    padding-right: 10px;
     box-shadow: 0 3px 6px #00000061;
 }
 .fab:hover{
@@ -199,6 +201,25 @@ button:focus{
 .fab .material-icons{
     font-size: 24px;
 }
+.leftbtns{
+    text-align: left;
+    box-shadow: -6px 2px 4px 4px #00000061;
+    background: #ffffff;
+    height: 24px;
+    padding: 16px;
+}
+.rightbtns{
+    text-align: right;
+    padding: 16px;
+    box-shadow: 6px 2px 4px 4px #00000061;
+    background: #ffffff;
+    height: 24px;
+}
+.centerpiece:before{
+    border-top-left-radius: 100% 48px;
+    border-top-right-radius: 100% 48px;
+    background: #ffffff
+}
 .action{
     background: #fafafa;
     z-index: 50;
@@ -207,6 +228,17 @@ button:focus{
 }
 .action:card{
     background: white;
+}
+.bottomnav{
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    color: black;
+    font-size: 24px;
+    transition: all 0.25s cubic-bezier(.25,.8,.25,1);
+    box-shadow: 0 2px 4px #00000061, 0 2px 4px #00000061;
 }
 #settings_main{
     display: none;

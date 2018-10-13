@@ -1,30 +1,25 @@
-<div class="hd wrapper3">
-    <div style="text-align: left;">
-        <button class="hdiconbtn" id="signinbtn" style="background: white; border: 0 none; color: black; box-shadow: 0 0 0 white; padding: 0; margin: 0;"  onclick="show_signin_card()">
-            <i class="material-icons" style="font-size: 32px;">person</i>
-        </button>
-        <div  style="left: 16px; position: fixed; display: none; top: 48px" id="gsignininfo">
+<div class="scroll" onscroll="osc(0,0)">
+    <h2 style="text-align: center;">Bavarder</h2>
+    <div id="users"></div>
+</div>
+
+<div class="bottomnav">
+    <div class="leftbtns">
+        <div class="hdiconbtn" id="signinbtn" onclick="show_signin_card()">
+            <i class="material-icons" style="font-size: 24px;">person</i>
+        </div>
+        <div  style="left: 16px; position: fixed; display: none; bottom: 36px" id="gsignininfo">
             <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
         </div>
     </div>
-    <h2 style="text-align: center;">Bavarder</h2>
-    <div style="text-align: right;">
-        <i class="material-icons" style="font-size: 32px;" onclick="show_info_cards()">more_vert</i>
-        <div class="info" id="info">
-            <div id="info0" onclick="opensettings()">Settings</div>
-            <div id="info1" onclick="window.location.href = 'https://github.com/storm246/bavarder'">
-                Visit Github
-            </div>
-        </div>
+    <div class="rightbtns">
+        <i class="material-icons" style="font-size: 24px;" onclick="opensettings()">settings</i>
     </div>
 </div>
 
-<div class="scroll" onscroll="osc(0,0)">
-    <div class="fab" onclick="add_chat_action()">
-        <i class="material-icons">add</i>
-    </div>
-    <div id="users"></div>
-</div>
+<div class="fab" onclick="add_chat_action()">
+    <i class="material-icons">add</i>
+</div>  
 
 <div class="add_chat_screen action">
     <div class="hd">
@@ -113,7 +108,7 @@
             document.getElementById("emailform2").value=profile.getEmail()
             document.getElementById("email").value=profile.getEmail()
             document.getElementById("signinmsg").style.display="none";
-            document.getElementById("signinbtn").innerHTML="<img src="+profile.getImageUrl()+" style='width: 32; margin-left: 8px; border-radius: 16px'>"
+            document.getElementById("signinbtn").innerHTML="<img src="+profile.getImageUrl()+" style='width: 24; border-radius: 16px; border: 2px solid #d32f2f'>"
             getusersettings(profile.getEmail())
         };
     </script>

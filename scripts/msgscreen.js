@@ -96,5 +96,5 @@ function chat_action(name){
 function back_chat_action(){
     document.getElementById("lastnumber").value=-1;
     document.getElementById("messages").innerHTML=" "
-    document.getElementsByClassName("chat_screen")[0].style.right="-100%";
+    document.getElementsByClassName("chat_screen")[0].style.right="-105%";
 }

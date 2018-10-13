@@ -1,3 +1,4 @@
+currentscr=0
 if ('serviceWorker' in navigator) {
 window.addEventListener('load', function() {
         navigator.serviceWorker.register('/sw.js', {updateViaCache: 'none'}).then(function(registration) {
@@ -38,12 +39,6 @@ async function allowbtnclick(){
     })
 }
 
-function opensettings(){
-    document.getElementsByClassName("settings_screen")[0].style.left="0%";
-}
-function back_settings_action(){
-    document.getElementsByClassName("settings_screen")[0].style.left="-100%";
-}
 function add_chat_action(){
     document.getElementsByClassName("add_chat_screen")[0].style.bottom="0%";
     allowbtnclick()
@@ -53,10 +48,21 @@ function back_add_chat_action(){
     document.getElementById("unameip").value="";
 }
 function osc(x,y){
-    if (document.getElementsByClassName("scroll")[x].scrollTop==0) {
-        document.getElementsByClassName("hd")[y].style.boxShadow="#000000 0 0 0"
-    } else {
-        document.getElementsByClassName("hd")[y].style.boxShadow="#00000061 0 2px 4px"
+    if (x!=0){
+        if (document.getElementsByClassName("scroll")[x].scrollTop==0) {
+            document.getElementsByClassName("hd")[y].style.boxShadow="#000000 0 0 0"
+        } else {
+            document.getElementsByClassName("hd")[y].style.boxShadow="#00000061 0 2px 4px"
+        }
+    }
+    else{
+        if (currentscr>document.getElementsByClassName("scroll")[x].scrollTop){
+            document.getElementsByClassName("bottomnav")[y].style.bottom="0"
+        }
+        else{
+            document.getElementsByClassName("bottomnav")[y].style.bottom="-64"
+        }
+        currentscr=document.getElementsByClassName("scroll")[x].scrollTop
     }
 }
 function show_info_cards() {
