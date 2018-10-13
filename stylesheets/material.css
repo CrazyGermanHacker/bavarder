@@ -56,7 +56,7 @@ button:focus{
     box-shadow: 0 2px 4px #00000061;
     position:  relative;
     z-index: 4;
-    background: white
+    background: white;
 }
 .scroll{
     overflow-y: auto;
@@ -69,9 +69,19 @@ button:focus{
 .hd h2{
     margin: 0;
 }
+.chatbutton{
+    padding-top: 12px;
+    background: white;
+    box-shadow: 0 .5px 1px #00000061;
+    padding-bottom: 12px;
+    z-index: 1;
+    margin: 2px;
+}
 .chatbutton:hover{
-    background: #afafaf61;
+    background: #ff665961;
+    box-shadow: 0 4px 8px #00000061;
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    z-index: 12;
 }
 .card{
     box-shadow: 0 .5px 1px #00000061;
