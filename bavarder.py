@@ -95,28 +95,40 @@ class grabmessages:
         x=web.input()
         try:
             q=msg.query(
-                msg.emailto.IN([x.to, x.email]), 
-                msg.emailfrom.IN([x.to, x.email]),
+                ndb.AND(
+                    msg.emailto.IN([x.to, x.email]), 
+                    msg.emailfrom.IN([x.to, x.email])
+                ),
                 msg.number>int(x.lastnumber)
             ).order(msg.number).fetch()
+            for message in q:
+                print message.emailto
         except:
             return "false"
-        messagesto=[]
-        messagesfrom=[]
+
+        if len(q) == 0:
+            return "false"
+        else:
+            print len(q)
+        messages=[]
+        messagesloc=[]
         lastnum=int(x.lastnumber)
 
         for y in range(len(q)):
-            if (q[y].emailto==x.to):
-                messagesto.append(q[y].message)
+            if (q[y].emailto==x.to) and  (q[y].emailfrom==x.email): # to
+                messages.append(q[y].message)
+                messagesloc.append(True)
                 lastnum=q[y].number
-            if (q[y].emailfrom==x.to):
-                messagesfrom.append(q[y].message)
+            if (q[y].emailfrom==x.to) and (q[y].emailto==x.email): # from
+                messages.append(q[y].message)
+                messagesloc.append(False)
                 lastnum=q[y].number
 
-        count=len(messagesto)+len(messagesfrom)
+        count=len(messages)
+
 
         if count!=int(x.messagecount) or (count==0):
-            return json.dumps({"to":messagesto, "from":messagesfrom, "lastnum":lastnum})
+            return json.dumps({"messages":messages, "lastnum":lastnum, "loc":messagesloc})
         else:
             return "false"
 
