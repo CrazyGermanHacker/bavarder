@@ -1,3 +1,5 @@
+<!--Main Page-->
+
 <div class="scroll" onscroll="osc(0,0)">
     <h2 style="text-align: center;">Bavarder</h2>
     <div id="users"></div>
@@ -5,11 +7,8 @@
 
 <div class="bottomnav">
     <div class="leftbtns">
-        <div class="hdiconbtn" id="signinbtn" onclick="show_signin_card()">
+        <div class="hdiconbtn" id="signinbtn" onclick="showprofile()">
             <i class="material-icons" style="font-size: 24px;">person</i>
-        </div>
-        <div  style="left: 16px; position: fixed; display: none; bottom: 36px" id="gsignininfo">
-            <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
         </div>
     </div>
     <div class="rightbtns">
@@ -20,6 +19,47 @@
 <div class="fab" onclick="add_chat_action()">
     <i class="material-icons">add</i>
 </div>  
+
+
+
+
+<!--Profile-->
+
+
+<div class="profile action">
+    <div class="hd">
+        <h2><i class="material-icons" style="font-size: 32px" onclick="back_profile()">arrow_back</i>Profile</h2>
+    </div>
+    <div class="card" id="signinscreen">
+        <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark" style="text-align: center;"></div>
+    </div>
+    <div class="scroll" id="profilepage">
+        <div class="card">
+            <div id="profileimg"></div>
+            <h2 id="name"></h2>
+        </div>
+
+        <div class="card">
+            <h2>Profile Settings</h2>
+            <button onclick="opendeletecon()"><b>DELETE PROFILE</b></button>
+        </div>
+    </div>
+    <div class="deletecon">
+        <div class="dialogue">
+            <h6 style="font-size: 20; margin: 0;">Delete your account?</h6>
+            <p style="font-size: 16px;">This will delete all contacts and settings. This will not sign you out.</p>
+            <div class='wrapper3'>
+                <div></div>
+                <button onclick="hidedeletecon()"><b>CANCEL</b></button>
+                <button onclick="deleteprof()"><b>OK</b></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--Add Chat-->
 
 <div class="add_chat_screen action">
     <div class="hd">
@@ -36,6 +76,11 @@
         </form>
     </div>
 </div>
+
+
+
+
+<!--Settings-->
 
 <div class="settings_screen action">
     <div class="hd">
@@ -67,6 +112,11 @@
     </div>
 </div>
 
+
+
+
+<!--Chat Screen-->
+
 <div class="chat_screen action">
     <div class="hd">
         <h2><i class="material-icons" style="font-size: 32px" onclick="back_chat_action()">arrow_back</i><b id="user"></b></h2>
@@ -89,6 +139,9 @@
         </div>
     </div>
 </div>
+
+
+
 <script>
         function onSignIn(googleUser){
                 // Useful data for your client-side scripts:
@@ -109,6 +162,10 @@
             document.getElementById("email").value=profile.getEmail()
             document.getElementById("signinmsg").style.display="none";
             document.getElementById("signinbtn").innerHTML="<img src="+profile.getImageUrl()+" style='width: 24; border-radius: 16px; border: 2px solid #d32f2f'>"
+            document.getElementById("signinscreen").style.display="none"
+            document.getElementById("profilepage").style.display="inline-block"
+            document.getElementById("name").innerHTML=profile.getEmail()
+            document.getElementById("profileimg").innerHTML="<img src='"+profile.getImageUrl()+"?sz=1000' style='width: 15vw;'>"
             getusersettings(profile.getEmail())
         };
     </script>

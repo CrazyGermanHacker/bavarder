@@ -65,17 +65,18 @@ function osc(x,y){
         currentscr=document.getElementsByClassName("scroll")[x].scrollTop
     }
 }
-function show_info_cards() {
-    if (document.getElementById("info").style.display=="none"){
-        document.getElementById("info").style.display= "inline";
-    }else{
-        document.getElementById("info").style.display= "none";
-    }
+
+function showprofile() {
+    document.getElementsByClassName("profile")[0].style.left="0%";
 }
-function show_signin_card() {
-    if (document.getElementById("gsignininfo").style.display=="none"){
-        document.getElementById("gsignininfo").style.display= "inline";
-    }else{
-        document.getElementById("gsignininfo").style.display= "none";
-    }
+function back_profile() {
+    document.getElementsByClassName("profile")[0].style.left="-105%";
+}
+function opendeletecon() {
+    document.getElementsByClassName("deletecon")[0].style.display="inline-block"
+    document.getElementsByClassName("dialogue")[0].style.display="inline-block"
+}
+function hidedeletecon() {
+    document.getElementsByClassName("deletecon")[0].style.display="none"
+    document.getElementsByClassName("dialogue")[0].style.display="none"
 }

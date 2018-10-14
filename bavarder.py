@@ -7,7 +7,8 @@ urls=(
     "/sendmsg", "sendmsg",
     "/user","grabcontacts",
     "/rscvmsgs", "grabmessages",
-    "/changesetting", "set"
+    "/changesetting", "set",
+    "/delprof", "delprof"
 )
 
 app=web.application(urls, globals())
@@ -160,5 +161,13 @@ class set:
         )
         set_key = userset.put()
         return '<head><meta http-equiv="refresh" content="0; url=/" /></head>'
+
+class delprof:
+    def POST(self):
+        x=web.input()
+        q=user.query(user.user==x.email).fetch()
+        print q
+        q[0].key.delete()
+        return "success"
 
 app=app.gaerun()

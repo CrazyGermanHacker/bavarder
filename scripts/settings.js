@@ -85,3 +85,17 @@ function opensettings(){
 function back_settings_action(){
     document.getElementsByClassName("settings_screen")[0].style.right="-105%";
 }
+
+function deleteprof() {
+    var request = new XMLHttpRequest()
+    request.open("POST", "/delprof", async=true)
+
+    request.addEventListener("load", function() {
+        window.location.reload()
+    })
+
+    var f = document.getElementById("add_form")
+    var em = new FormData(f)
+
+    request.send(em)
+}  
