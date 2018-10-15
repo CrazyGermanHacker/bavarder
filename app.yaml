@@ -15,6 +15,9 @@ handlers:
   script: bavarder.app
 - url: /delprof
   script: bavarder.app
+- url: /firebase-messaging-sw.js
+  static_files: scripts/firebase-messaging-sw.js
+  upload: scripts/firebase-messaging-sw.js
 - url: /material.css
   static_files: stylesheets/material.css
   upload: stylesheets/material.css

@@ -1,4 +1,4 @@
-var CACHE_NAME = 'bavardercsh-2';
+var CACHE_NAME = 'bavardercsh-4';
 var urlsToCache = [
   '/',
   '/material.css',
@@ -41,4 +41,24 @@ self.addEventListener('activate', function(event) {
         );
         })
     );
+
+});
+
+self.addEventListener('push', function(event) {
+    event.waitUntil(
+        self.registration.showNotification('Hello world!')
+    )
+})
+
+
+self.addEventListener('notificationclick', function(event) {
+    var notification = event.notification;
+    var action = event.action;
+  
+    if (action === 'close') {
+      notification.close();
+    } else {
+      clients.openWindow('http://www.stormprograms.com');
+      notification.close();
+    }
 });

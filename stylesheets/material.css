@@ -288,3 +288,6 @@ margin: 0 auto;
     padding-bottom: 72px;
     padding-top: 72px;
 }
+#profilepage{
+    display: none;
+}

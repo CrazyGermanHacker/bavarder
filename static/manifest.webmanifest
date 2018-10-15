@@ -11,5 +11,6 @@
             "sizes": "512x512"
         }
     ],
-    "theme_color": "#ff6659"
+    "theme_color": "#ff6659",
+    "gcm_sender_id": "103953800507"
 }

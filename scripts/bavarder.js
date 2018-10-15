@@ -1,11 +1,28 @@
 currentscr=0
+
+
+function urlBase64ToUint8Array(base64String) {
+    var padding = '='.repeat((4 - base64String.length % 4) % 4);
+    var base64 = (base64String + padding)
+        .replace(/\-/g, '+')
+        .replace(/_/g, '/');
+
+    var rawData = window.atob(base64);
+    var outputArray = new Uint8Array(rawData.length);
+
+    for (var i = 0; i < rawData.length; ++i) {
+        outputArray[i] = rawData.charCodeAt(i);
+    }
+    return outputArray;
+}
+
 if ('serviceWorker' in navigator) {
-window.addEventListener('load', function() {
+    window.addEventListener('load', function() {
         navigator.serviceWorker.register('/sw.js', {updateViaCache: 'none'}).then(function(registration) {
-        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
         }, function(err) {
-        console.log('ServiceWorker registration failed: ', err);
-        });
+            console.log('ServiceWorker registration failed: ', err);
+        })
     });
 }
 
@@ -41,6 +58,9 @@ async function allowbtnclick(){
 
 function add_chat_action(){
     document.getElementsByClassName("add_chat_screen")[0].style.bottom="0%";
+    if ('serviceWorker' in navigator) {
+        askSub()
+    }
     allowbtnclick()
 }
 function back_add_chat_action(){
