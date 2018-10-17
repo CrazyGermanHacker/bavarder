@@ -48,7 +48,7 @@ function urlBase64ToUint8Array(base64String) {
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
-        navigator.serviceWorker.register('/sw.js', {updateViaCache: 'none'}).then(function(registration) {
+        navigator.serviceWorker.register('/sw.js').then(function(registration) {
             console.log('ServiceWorker registration successful with scope: ', registration.scope);
         }, function(err) {
             console.log('ServiceWorker registration failed: ', err);
@@ -88,9 +88,6 @@ async function allowbtnclick(){
 
 function add_chat_action(){
     document.getElementsByClassName("add_chat_screen")[0].style.bottom="0%";
-    if ('serviceWorker' in navigator) {
-        askSub()
-    }
     allowbtnclick()
 }
 function back_add_chat_action(){
