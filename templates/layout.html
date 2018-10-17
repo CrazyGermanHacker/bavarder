@@ -69,7 +69,7 @@ $def with(content)
         document.getElementById("name").innerHTML=profile.getEmail()
         document.getElementById("profileimg").innerHTML="<img src='"+profile.getImageUrl()+"?sz=1000' style='width: 15vw;'>"
         getusersettings(profile.getEmail())
-        initnotif(firebase)
+        // initnotif(firebase)
     };
     function initnotif(firebase) {
         const messaging = firebase.messaging();

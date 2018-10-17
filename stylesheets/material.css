@@ -192,6 +192,9 @@ button:focus{
     text-align: left;
     box-shadow: -6px 2px 4px 4px #00000061;
     background: #ffffff;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 36px max-content 1fr;
     height: 24px;
     padding: 16px;
 }
@@ -290,4 +293,19 @@ margin: 0 auto;
 }
 #profilepage{
     display: none;
+}
+#installbutton{
+    padding: 0px; 
+    padding-right: 4px; 
+    padding-left: 4px; 
+    text-align: left; 
+    display: none;
+    user-select: none;
+    transition: all 0.5s cubic-bezier(.25,.8,.25,1);
+    background: #ff665950
+}
+#installbutton:hover{
+    box-shadow: 0 3px 6px #00000061;
+    background: #d32f2f;
+    color: white;
 }

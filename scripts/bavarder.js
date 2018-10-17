@@ -1,4 +1,34 @@
 currentscr=0
+var installbtn
+window.addEventListener(("load"), ()=> {
+    installbtn=document.getElementById("installbutton")
+    let stashedprompt
+
+    window.addEventListener("beforeinstallprompt", (event)=>{
+        event.preventDefault();
+
+        stashedprompt=event
+
+        installbtn.style.display="inline-block"
+    })
+
+    installbtn.addEventListener("click", (event) => {
+        installbtn.style.display="none"
+
+        stashedprompt.prompt()
+
+        stashedprompt.userChoice
+            .then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    console.log('User accepted the A2HS prompt');
+                } else {
+                    console.log('User dismissed the A2HS prompt');
+                }
+                stashedprompt = null;
+            })
+    })
+})
+
 
 
 function urlBase64ToUint8Array(base64String) {

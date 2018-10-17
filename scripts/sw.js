@@ -44,12 +44,6 @@ self.addEventListener('activate', function(event) {
 
 });
 
-self.addEventListener('push', function(event) {
-    event.waitUntil(
-        self.registration.showNotification('Hello world!')
-    )
-})
-
 
 self.addEventListener('notificationclick', function(event) {
     var notification = event.notification;
