@@ -24,26 +24,30 @@ $def with(content)
         <script src="/bavarder.js"></script>
         <script src="/settings.js"></script>
         <script src="/msgscreen.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/5.5.4/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/5.5.4/firebase-messaging.js"></script>
-        <script>
-        // Initialize Firebase
-        var config = {
-            apiKey: "AIzaSyCfxMM6szjWuTkHX_U55VLA5OTTNhCRmHo",
-            authDomain: "lightningchat-1.firebaseapp.com",
-            databaseURL: "https://lightningchat-1.firebaseio.com",
-            projectId: "lightningchat-1",
-            storageBucket: "lightningchat-1.appspot.com",
-            messagingSenderId: "878100810498"
-        };
-        firebase.initializeApp(config);
-        </script>
     </head>
     <body>
         $:content
     </body>
 </html>
+<script src="https://www.gstatic.com/firebasejs/5.5.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.5.4/firebase-messaging.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyCfxMM6szjWuTkHX_U55VLA5OTTNhCRmHo",
+        authDomain: "lightningchat-1.firebaseapp.com",
+        databaseURL: "https://lightningchat-1.firebaseio.com",
+        projectId: "lightningchat-1",
+        storageBucket: "lightningchat-1.appspot.com",
+        messagingSenderId: "878100810498"
+    };
+    firebase.initializeApp(config);
+    const messaging = firebase.messaging()
 
+    messaging.onMessage(function(message) {
+        console.log(message)
+    })
+</script>
 <script>
     function onSignIn(googleUser){
             // Useful data for your client-side scripts:
@@ -69,41 +73,6 @@ $def with(content)
         document.getElementById("name").innerHTML=profile.getEmail()
         document.getElementById("profileimg").innerHTML="<img src='"+profile.getImageUrl()+"?sz=1000' style='width: 15vw;'>"
         getusersettings(profile.getEmail())
-        // initnotif(firebase)
+        requestnotifs(messaging)
     };
-    function initnotif(firebase) {
-        const messaging = firebase.messaging();
-        messaging.usePublicVapidKey("BEat4peY80_ogD6jOw3AdjTOse2qdWZIXdA-wFze1wgglklHmU8hoggS4FNZvl75QTqnoskAJOx-cL0ZVhgl9mc");
-
-        messaging.requestPermission().then(function() {
-        console.log('Notification permission granted.');
-            // TODO(developer): Retrieve an Instance ID token for use with FCM.
-            // ...
-        }).catch(function(err) {
-            console.log('Unable to get permission to notify.', err);
-        });
-
-        messaging.getToken().then(function(currentToken) {
-            if (!currentToken) {
-            // Show permission request.
-            console.log('No Instance ID token available. Request permission to generate one.');
-            // Show permission UI.
-            updateUIForPushPermissionRequired();
-            }
-        }).catch(function(err) {
-            console.log('An error occurred while retrieving token. ', err);
-        });
-        messaging.onTokenRefresh(function() {
-            messaging.getToken().then(function(refreshedToken) {
-            console.log('Token refreshed.');
-            // Indicate that the new Instance ID token has not yet been sent to the
-            // app server.
-            // Send Instance ID token to app server.
-            sendTokenToServer(refreshedToken);
-            // ...
-            }).catch(function(err) {
-                console.log('Unable to retrieve refreshed token ', err);
-            });
-        });
-    }
 </script>

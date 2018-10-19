@@ -4,4 +4,6 @@ appengine_config*
 *.pyc
 __init__*
 node_modules/
-pushkey.key
+pushkey.key/
+accountcreds.py
+sendnotif.sh

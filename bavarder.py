@@ -8,7 +8,8 @@ urls=(
     "/user","grabcontacts",
     "/rscvmsgs", "grabmessages",
     "/changesetting", "set",
-    "/delprof", "delprof"
+    "/delprof", "delprof",
+    "/associateprof", "allownotifs"
 )
 
 app=web.application(urls, globals())
@@ -25,6 +26,7 @@ class user(ndb.Model):
     dark_theme=ndb.BooleanProperty()
     noir=ndb.BooleanProperty()
     contacts=ndb.StringProperty(repeated=True)
+    notifclientids=ndb.StringProperty(repeated=True)
 
 class index:
     def GET(self):
@@ -169,5 +171,30 @@ class delprof:
         print q
         q[0].key.delete()
         return "success"
+
+class allownotifs:
+    def POST(self):
+        x = web.input()
+        q = user.query().fetch()
+
+        for y in range(len(q)):
+            if q[y].user==x.email:
+                users=q[y].key.get()
+                idinids=False
+                for z in range(0,len(users.notifclientids)):
+                    if users.notifclientids[z]==x.notifid:
+                        idinids=True
+                if idinids!=True:
+                    users.notifclientids.append(x.notifid)
+                    users.put()
+                return "successfully added notifs"
+
+        y = user(
+            user=x.email
+        )
+        y.notifclientids.append(x.notifid)
+        y.put()
+
+        return "successfully added notifs"
 
 app=app.gaerun()

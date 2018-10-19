@@ -1,5 +1,6 @@
 currentscr=0
 var installbtn
+
 window.addEventListener(("load"), ()=> {
     installbtn=document.getElementById("installbutton")
     let stashedprompt
@@ -29,7 +30,15 @@ window.addEventListener(("load"), ()=> {
     })
 })
 
-
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js').then(function(registration) {
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        }, function(err) {
+            console.log('ServiceWorker registration failed: ', err);
+        })
+    });
+}
 
 function urlBase64ToUint8Array(base64String) {
     var padding = '='.repeat((4 - base64String.length % 4) % 4);
@@ -46,14 +55,25 @@ function urlBase64ToUint8Array(base64String) {
     return outputArray;
 }
 
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-        navigator.serviceWorker.register('/sw.js').then(function(registration) {
-            console.log('ServiceWorker registration successful with scope: ', registration.scope);
-        }, function(err) {
-            console.log('ServiceWorker registration failed: ', err);
-        })
-    });
+function requestnotifs(messaging) {
+    messaging.requestPermission()
+    .then(function() {
+        console.log("granted")
+        return messaging.getToken()
+    })
+    .then(function(token) {
+        console.log("Token", token)
+        document.getElementById("notifid").value=token
+
+        var request = new XMLHttpRequest()
+        request.open("POST", "/associateprof", async=true)
+        var f = document.getElementById("add_form")
+        var em = new FormData(f)
+        request.send(em)
+    })
+    .catch(function(err) {
+        console.log("error")
+    })
 }
 
 function isformchanged(){
