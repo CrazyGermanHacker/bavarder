@@ -1,6 +1,16 @@
 import web
 import json
+import urllib3
+import httplib2
+from oauth2client.service_account import ServiceAccountCredentials
 from google.appengine.ext import ndb
+
+def get_at():
+    b=urllib3.request.urlopen("https://bavader.app/lightningchat-1-firebase-adminsdk-zrckh-870350e422.json")
+    credentials = ServiceAccountCredentials.from_json(json.loads(b.read().decode()), 'https://www.googleapis.com/auth/firebase.messaging')
+    access_token_info = credentials.get_access_token()
+    print "Hi"
+    return access_token_info.access_token
 
 urls=(
     "/", "index",
@@ -67,6 +77,20 @@ class sendmsg:
         except:
             msgnumber=0
         
+        '''data = {
+            "message":{
+                "token" : "eY44lWSDApI:APA91bFOLd3-jQKiLGtXa36PNi5yzyion7Mx-E4JxU_l5szJ7x6DEuHSh40GGM4uML08BwKzxgtuQZwXHYM8AwUzJnakjeNiAJoeCoqdqHx3198zpdeISTnctbvpXZ_4jbt5NUOvxP0q",
+                "notification":{
+                    "body": "Hello World",
+                    "title": "Hello"
+                }
+            }
+        }
+        
+        
+        httplib2.Http().request("https://fcm.googleapis.com/v1/projects/lightningchat-1/messages:send", method="POST", headers={"Authorization": "Bearer %s" % (get_at())}, body=json.dumps(data))
+'''
+
         message_key = msg(
             emailto=x.to, emailfrom=x.email, message=x.message,  number=msgnumber
         )

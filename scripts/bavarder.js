@@ -62,7 +62,6 @@ function requestnotifs(messaging) {
         return messaging.getToken()
     })
     .then(function(token) {
-        console.log("Token", token)
         document.getElementById("notifid").value=token
 
         var request = new XMLHttpRequest()

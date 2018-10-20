@@ -1,3 +1,5 @@
+alreadyrunning=false
+
 function sendfinished(){
     var jsparsed = JSON.parse(this.responseText)
     document.getElementById("messagefld").value="";
@@ -33,7 +35,12 @@ function recieve(){
     request = new XMLHttpRequest()
     request.open("POST", "/rscvmsgs", async=true)
 
+    request.addEventListener("progress", function(){
+        alreadyrunning=true
+    })
+
     request.addEventListener("load", function(){
+        alreadyrunning=false
         if (this.responseText!="false"){
             var messages=JSON.parse(this.responseText)
             document.getElementById("lastnumber").value=messages.lastnum
@@ -56,6 +63,7 @@ function recieve(){
                 }
             }
             document.getElementById("messages").scrollTop=document.getElementById("messages").scrollHeight
+            
         }
     })
 
@@ -65,7 +73,7 @@ function recieve(){
 
     request.send(fd)
 
-    if (document.getElementsByClassName("chat_screen")[0].style.right=="0%"){
+    if ((document.getElementsByClassName("chat_screen")[0].style.right=="0%") && (alreadyrunning!=true)){
         setTimeout( function(){
             recieve()
         },

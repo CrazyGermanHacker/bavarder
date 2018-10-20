@@ -7,3 +7,4 @@ node_modules/
 pushkey.key/
 accountcreds.py
 sendnotif.sh
+lightningchat*
