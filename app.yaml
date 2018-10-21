@@ -47,3 +47,6 @@ handlers:
 - url: /favicon.ico
   static_files: static/favicon.ico
   upload: static/favicon.ico
+- url: /notificon.ico
+  static_files: static/notificon.ico
+  upload: static/notificon.ico

@@ -7,8 +7,6 @@ import urllib3
 from oauth2client.service_account import ServiceAccountCredentials
 from google.appengine.ext import ndb
 from google.appengine.api import app_identity
-import cloudstorage as gcs
-
 
 def get_at():
     a=ServiceAccountCredentials.from_json_keyfile_dict(sendmsg.kfdict, "https://www.googleapis.com/auth/firebase.messaging")
@@ -88,44 +86,44 @@ class sendmesg:
 
         http = httplib2.Http()
 
-        print nids[0]
+        for item in nids:
 
-        data = {
-            'message':{
-                'token' : '{0}'.format(nids[0]),
-                'notification':{
-                    'body': '{0}'.format(x.message),
-                    'title': '{0}'.format(x.email),
-                },
-                'webpush': {
-                    'fcm_options':{
-                        'link': 'https://bavarder.app',
-                    },
+            data = {
+                'message':{
+                    'token' : '{0}'.format(item),
                     'notification':{
-                        'actions':[
-                            {
-                                'action': 'reply',
-                                'title': 'Reply'
-                            }
-                        ],
-                        'badge': '/favicon.ico'
+                        'body': '{0}'.format(x.message),
+                        'title': '{0}'.format(x.email),
+                    },
+                    'webpush': {
+                        'fcm_options':{
+                            'link': 'https://bavarder.app',
+                        },
+                        'notification':{
+                            'actions':[
+                                {
+                                    'action': 'reply',
+                                    'title': 'Reply'
+                                }
+                            ],
+                            'badge': '/notificon.ico'
+                        }
                     }
-                }
-            },
-        }
+                },
+            }
 
-        auth = "Bearer " + get_at()
+            auth = "Bearer " + get_at()
 
 
-        r = http.request(
-            uri="https://fcm.googleapis.com/v1/projects/lightningchat-1/messages:send",
-            method="POST",
-            headers={
-                "Content-Type": "application/json",
-                "Authorization": auth
-            },
-            body=data
-        )
+            r = http.request(
+                uri="https://fcm.googleapis.com/v1/projects/lightningchat-1/messages:send",
+                method="POST",
+                headers={
+                    "Content-Type": "application/json",
+                    "Authorization": auth
+                },
+                body=str(data)
+            )
 
 
         message_key = msg(
