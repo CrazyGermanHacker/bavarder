@@ -1,145 +1,254 @@
-<!--Main Page-->
+$def with(sdr)
 
-<div class="scroll" onscroll="osc(0,0)">
-    <h2 style="text-align: center; color: #d32f2f">Bavarder</h2>
-    <div id="users"></div>
-</div>
+<html lang="en">
+    <head>
+        <title>$sdr</title>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114307532-3"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
 
-<div class="bottomnav">
-    <div class="leftbtns">
-        <div class="hdiconbtn" id="signinbtn" onclick="showprofile()">
-            <i class="material-icons" style="font-size: 24px;">person</i>
+            gtag('config', 'UA-114307532-3');
+        </script>
+        <link href="https://fonts.googleapis.com/css?family=Poppins:200" rel="stylesheet">
+        <meta name="theme-color" content="#d32f2f">
+        <link href="/material.css" type="text/css" rel="stylesheet">
+        <link href="/toggle-md.css" type="text/css" rel="stylesheet">
+        <link rel="manifest" href="/manifest.webmanifest">
+        <meta name="google-signin-scope" content="profile email">
+        <meta name="google-signin-client_id" content="878100810498-2vuvkmjq280vou2p2l5ksatl1ai39qpa.apps.googleusercontent.com">
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="/bavarder.js"></script>
+        <script src="/settings.js"></script>
+        <script src="/msgscreen.js"></script>
+        <meta name="description" content="Bavarder is a messaging PWA for Google Chrome.">
+    </head>
+    <body>
+        <!--Main Page-->
+        <div class="scroll" onscroll="osc(0,0)">
+            <h2 style="text-align: center; color: #d32f2f">Bavarder</h2>
+            <div id="users"></div>
         </div>
-        <div class="card" id="installbutton">
-            <h6 style="margin: 0px; padding: 0px;"><i class="material-icons" style="padding: 0px; margin-left: 0px;">get_app</i>Install App</h6>
-        </div>
-    </div>
-    <div class="rightbtns">
-        <i class="material-icons" style="font-size: 24px;" onclick="opensettings()">settings</i>
-    </div>
-</div>
-
-<div class="fab" onclick="add_chat_action()">
-    <i class="material-icons">add</i>
-</div>  
-
-
-
-
-<!--Profile-->
-
-
-<div class="profile action">
-    <div class="hd">
-        <h2><i class="material-icons" style="font-size: 32px" onclick="back_profile()">arrow_back</i>Profile</h2>
-    </div>
-    <div class="card" id="signinscreen">
-        <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark" style="text-align: center;"></div>
-    </div>
-    <div class="scroll" id="profilepage">
-        <div class="card">
-            <div id="profileimg"></div>
-            <h2 id="name"></h2>
-        </div>
-
-        <div class="card">
-            <h2>Profile Settings</h2>
-            <button onclick="opendeletecon()"><b>DELETE PROFILE</b></button>
-        </div>
-    </div>
-    <div class="deletecon">
-        <div class="dialogue">
-            <h6 style="font-size: 20; margin: 0;">Delete your account?</h6>
-            <p style="font-size: 16px;">This will delete all contacts and settings. This will not sign you out.</p>
-            <div class='wrapper3'>
-                <div></div>
-                <button onclick="hidedeletecon()"><b>CANCEL</b></button>
-                <button onclick="deleteprof()"><b>OK</b></button>
+        <div class="bottomnav">
+            <div class="leftbtns">
+                <div class="hdiconbtn" id="signinbtn" onclick="showprofile()">
+                    <i class="material-icons" style="font-size: 24px;">person</i>
+                </div>
+                <button id="installbutton">
+                    <i class="material-icons" style="padding: 0px; margin-left: 0px;">get_app</i>
+                    Install App
+                </button>
+            </div>
+            <div class="rightbtns">
+                <i class="material-icons" style="font-size: 24px;" onclick="opensettings()">settings</i>
             </div>
         </div>
-    </div>
-</div>
-
-
-
-<!--Add Chat-->
-
-<div class="add_chat_screen action">
-    <div class="hd">
-        <h2><i class="material-icons" style="font-size: 32px" onclick="back_add_chat_action()">arrow_back</i>Add Chat</h2>
-    </div>
-    <div class="card">
-        <br />
-        <form id="add_form" action="/" method="POST">
-            <input type="text" name="user" placeholder="username" id="unameip" />
-            <input type="hidden" name="email" id="email"/>
-            <input type="hidden" name="notifid" id="notifid"/>
-            <br />
-            <br />
-            <button type="submit" id="add_btn" style="background: lightgrey; color: black" disabled><b>ADD</b></button>
-        </form>
-    </div>
-</div>
+        <div class="fab" onclick="add_chat_action()">
+            <i class="material-icons">add</i>
+        </div>
 
 
 
 
-<!--Settings-->
 
-<div class="settings_screen action">
-    <div class="hd">
-        <h2><i class="material-icons" style="font-size: 32px" onclick="back_settings_action()">arrow_back</i>Settings</h2>
-    </div>
-    <div class="scroll" id="settings_main">
-        <div class="card" id="settings-general">
-            <h3>General</h3>
-            <br />
-            <form action="/changesetting" method="POST">
-                <div>
-                    <h5>Theme</h5>
-                    <label>Enable Dark Theme
-                        <input class="simple-switch-input" id="darktoggle" name="dark" type="checkbox"/><span class="simple-switch dark"></span>
-                    </label>
-                    <br />
-                    <label>Use Noir Mode (Deeper blacks; Saves power on devices with OLED and AMOLED screens)
-                        <input class="simple-switch-input" id="noirmode" name="noirmode" type="checkbox"/><span class="simple-switch dark"></span>
-                    </label>
+
+        <!--Profile-->
+        <div class="profile action" id="profile">
+            <div class="hd">
+                <h2>
+                    <i class="material-icons" style="font-size: 32px" onclick="back_profile()">arrow_back</i>
+                    Profile
+                </h2>
+            </div>
+            <div class="card" id="signinscreen">
+                <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark" style="text-align: center;"></div>
+            </div>
+            <div class="scroll" id="profilepage">
+                <div class="card">
+                    <div id="profileimg"></div>
+                    <h2 id="name"></h2>
                 </div>
-                <input type="hidden" name="email" id="emailform" />
-                <br />
-                <button type="submit" id="applybutton" style="color: white; background: #d32f2f"><b>APPLY</b></button>
-            </form>
+                <div class="card">
+                    <h2>Profile Settings</h2>
+                    <button onclick="opendeletecon()">
+                        <b>DELETE PROFILE</b>
+                    </button>
+                </div>
+            </div>
+            <div class="deletecon">
+                <div class="dialogue">
+                    <h6 style="font-size: 20; margin: 0;">Delete your account?</h6>
+                    <p style="font-size: 16px;">This will delete all contacts and settings. This will not sign you out.</p>
+                    <div class='wrapper3'>
+                        <div></div>
+                        <button onclick="hidedeletecon()">
+                            <b>CANCEL</b>
+                        </button>
+                        <button onclick="deleteprof()">
+                            <b>OK</b>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="card" id="signinmsg">
-        <h3>You must be signed in to change settings.</h3>
-    </div>
-</div>
 
 
 
 
-<!--Chat Screen-->
 
-<div class="chat_screen action">
-    <div class="hd">
-        <h2><i class="material-icons" style="font-size: 32px" onclick="back_chat_action()">arrow_back</i><b id="user"></b></h2>
-    </div>
-    <div id="messages" class="scroll">
 
-    </div>
-    <div class="wrappermsg">
-        <div class="messagebar">
-            <form id="messagefield" onkeypress="return event.keyCode != 13;" autocomplete="off">
-                <input type="text" name="message" id="messagefld" style="border: 0 none; margin-top: 8px; font-size: 16px; border-radius: 24px; width: 100%; box-shadow: 0 6px 12px #00000061; padding-top: 12px; padding-bottom: 12px; padding-left: 4px;" placeholder="Message" />
-                <input type="hidden" name="email" id="emailform2" />
-                <input type="hidden" name="to" id="toform" />
-                <input type="hidden" id="lastnumber" name="lastnumber" value="-1" />
-                <input name="messagecount" id="messagecount" type="hidden" />
-            </form>
+
+        <!--Add Chat-->
+        <div class="add_chat_screen action" id="add_chat">
+            <div class="hd">
+                <h2>
+                    <i class="material-icons" style="font-size: 32px" onclick="back_add_chat_action()">arrow_back</i>
+                    Add Chat
+                </h2>
+            </div>
+            <div class="card">
+                <br/>
+                <form id="add_form" action="/" method="POST">
+                    <input type="text" name="user" placeholder="username" id="unameip"/>
+                    <input type="hidden" name="email" id="email"/>
+                    <input type="hidden" name="notifid" id="notifid"/>
+                    <br/>
+                    <br/>
+                    <button type="submit" id="add_btn" style="background: lightgrey; color: black" disabled>
+                        <b>ADD</b>
+                    </button>
+                </form>
+            </div>
         </div>
-        <div class="fib"  onclick="waittosend()">
-            <i class="material-icons" style="font-size: 32px">send</i>
+
+
+
+
+
+
+
+        <!--Settings-->
+        <div class="settings_screen action">
+            <div class="hd">
+                <h2>
+                    <i class="material-icons" style="font-size: 32px" onclick="back_settings_action()">arrow_back</i>
+                    Settings
+                </h2>
+            </div>
+            <div class="scroll" id="settings_main">
+                <div class="card" id="settings-general">
+                    <h3>General</h3>
+                    <br/>
+                    <form action="/changesetting" method="POST">
+                        <div>
+                            <h5>Theme</h5>
+                            <label>
+                                Enable Dark Theme
+                                <input class="simple-switch-input" id="darktoggle" name="dark" type="checkbox"/>
+                                <span class="simple-switch dark"></span>
+                            </label>
+                            <br/>
+                            <label>
+                                Use Noir Mode (Deeper blacks; Saves power on devices with OLED and AMOLED screens)
+                                <input class="simple-switch-input" id="noirmode" name="noirmode" type="checkbox"/>
+                                <span class="simple-switch dark"></span>
+                            </label>
+                        </div>
+                        <input type="hidden" name="email" id="emailform"/>
+                        <br/>
+                        <button type="submit" id="applybutton" style="color: white; background: #d32f2f">
+                            <b>APPLY</b>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="card" id="signinmsg">
+                <h3>You must be signed in to change settings.</h3>
+            </div>
         </div>
-    </div>
-</div>
+
+
+        
+        <!--Chat Screen-->
+        <div class="chat_screen action">
+            <div class="hd">
+                <h2>
+                    <i class="material-icons" style="font-size: 32px" onclick="back_chat_action()">arrow_back</i>
+                    <b id="user"></b>
+                </h2>
+            </div>
+            <div id="messages" class="scroll"></div>
+            <div class="wrappermsg">
+                <div class="messagebar">
+                    <form id="messagefield" onkeypress="return event.keyCode != 13;" autocomplete="off">
+                        <input type="text" name="message" id="messagefld" style="border: 0 none; margin-top: 8px; font-size: 16px; border-radius: 24px; width: 100%; box-shadow: 0 6px 12px #00000061; padding-top: 12px; padding-bottom: 12px; padding-left: 4px;" placeholder="Message"/>
+                        <input type="hidden" name="email" id="emailform2"/>
+                        <input type="hidden" name="to" id="toform"/>
+                        <input type="hidden" id="lastnumber" name="lastnumber" value="-1"/>
+                        <input name="messagecount" id="messagecount" type="hidden"/>
+                    </form>
+                </div>
+                <div class="fib" onclick="waittosend()">
+                    <i class="material-icons" style="font-size: 32px">send</i>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+<script src="https://www.gstatic.com/firebasejs/5.5.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.5.4/firebase-messaging.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyCfxMM6szjWuTkHX_U55VLA5OTTNhCRmHo",
+        authDomain: "lightningchat-1.firebaseapp.com",
+        databaseURL: "https://lightningchat-1.firebaseio.com",
+        projectId: "lightningchat-1",
+        storageBucket: "lightningchat-1.appspot.com",
+        messagingSenderId: "878100810498"
+    };
+    firebase.initializeApp(config);
+    const messaging = firebase.messaging()
+
+    messaging.onMessage(function(message) {
+        console.log(message)
+    })
+</script>
+<script>
+    function onSignIn(googleUser) {
+        // Useful data for your client-side scripts:
+        var profile = googleUser.getBasicProfile();
+        console.log("ID: " + profile.getId());
+        // Don't send this directly to your server!
+        console.log('Full Name: ' + profile.getName());
+        console.log('Given Name: ' + profile.getGivenName());
+        console.log('Family Name: ' + profile.getFamilyName());
+        console.log("Image URL: " + profile.getImageUrl());
+        console.log("Email: " + profile.getEmail());
+
+        // The ID token you need to pass to your backend:
+        var id_token = googleUser.getAuthResponse().id_token;
+        console.log("ID Token: " + id_token);
+        document.getElementById("settings_main").style.display = "inline-block";
+        document.getElementById("emailform").value = profile.getEmail()
+        document.getElementById("emailform2").value = profile.getEmail()
+        document.getElementById("email").value = profile.getEmail()
+        document.getElementById("signinmsg").style.display = "none";
+        document.getElementById("signinbtn").innerHTML = "<img alt='Profile'src=" + profile.getImageUrl() + " style='width: 24; border-radius: 16px; border: 2px solid #d32f2f'>"
+        document.getElementById("signinscreen").style.display = "none"
+        document.getElementById("profilepage").style.display = "inline-block"
+        document.getElementById("name").innerHTML = profile.getEmail()
+        document.getElementById("profileimg").innerHTML = "<img alt='Profile Settings' src='" + profile.getImageUrl() + "?sz=1000' style='width: 15vw;'>"
+        getusersettings(profile.getEmail())
+        requestnotifs(messaging)
+    }
+    if ('$sdr'!='') {
+        chat_action('$sdr')
+    }
+</script>

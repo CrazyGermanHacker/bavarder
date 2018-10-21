@@ -20,11 +20,11 @@ urls=(
     "/rscvmsgs", "grabmessages",
     "/changesetting", "set",
     "/delprof", "delprof",
-    "/associateprof", "allownotifs"
+    "/associateprof", "allownotifs",
 )
 
 app=web.application(urls, globals())
-render=web.template.render("templates/", base="layout")
+render=web.template.render("templates/")
 
 class msg(ndb.Model):
     emailto=ndb.StringProperty()
@@ -41,8 +41,8 @@ class user(ndb.Model):
 
 class index:
     def GET(self):
-        x=web.input()
-        return render.index()
+        x=web.input(sdr="")
+        return render.index(x.sdr)
 
     def POST(self):
         x=web.input()
@@ -95,6 +95,9 @@ class sendmesg:
                         'body': '{0}'.format(x.message),
                         'title': '{0}'.format(x.email),
                     },
+                    'data':{
+                        'sender': '{0}'.format(x.email),
+                    },
                     'webpush': {
                         'fcm_options':{
                             'link': 'https://bavarder.app',
@@ -124,6 +127,7 @@ class sendmesg:
                 },
                 body=str(data)
             )
+            print r
 
 
         message_key = msg(

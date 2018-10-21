@@ -1,4 +1,4 @@
-var CACHE_NAME = 'bavardercsh-12';
+var CACHE_NAME = 'bavardercsh-13';
 var urlsToCache = [
   '/',
   '/material.css',
@@ -35,7 +35,7 @@ self.addEventListener('fetch', function(event) {
 
 self.addEventListener('activate', function(event) {
 
-    var cacheWhitelist = ['bavardercsh-12'];
+    var cacheWhitelist = [''];
 
     event.waitUntil(
         caches.keys().then(function(cacheNames) {
@@ -49,17 +49,4 @@ self.addEventListener('activate', function(event) {
         })
     );
 
-});
-
-
-self.addEventListener('notificationclick', function(event) {
-    var notification = event.notification;
-    var action = event.action;
-  
-    if (action === 'close') {
-      notification.close();
-    } else {
-      clients.openWindow('http://www.stormprograms.com');
-      notification.close();
-    }
 });

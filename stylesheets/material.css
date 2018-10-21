@@ -3,7 +3,7 @@
 #ff6659
 #9a0007
 */
-body, html{
+body, html {
     margin: 0;
     padding: 0;
     height: 100%;
@@ -12,26 +12,32 @@ body, html{
     transition: all 0.25s cubic-bezier(.25,.8,.25,1);
     background: #fafafa;
 }
-a{
+
+a {
     text-decoration: none;
     color: black;
 }
-a:hover{
+
+a:hover {
     color: black;
     background: #fafafa;
     border: 0 none;
 }
-input{
+
+input {
     border: 1px solid black;
     border-radius: 4px;
     font-family: 'Poppins', sans-serif;
     padding: 4px;
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-}:focus{
+}
+
+:focus {
     border: 1px solid #d32f2f;
     outline: none;
 }
-button{
+
+button {
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
     background: #d32f2f;
     color: white;
@@ -43,22 +49,28 @@ button{
     padding-right: 16px;
     padding-left: 16px;
     font-size: 16px;
-}:hover{
-    background-color: #ff6659;
 }
-button:focus{
+
+button:hover {
+    background-color: #ff6659;
+    box-shadow: 0 3px 6px #00000061;
+}
+
+button:focus {
     border: none;
 }
-.hd{
+
+.hd {
     height: 48px;
     padding-top: 16px;
     padding-bottom: 16px;
     box-shadow: 0 2px 4px #00000061;
-    position:  relative;
+    position: relative;
     z-index: 4;
     background: white;
 }
-.scroll{
+
+.scroll {
     overflow-y: auto;
     width: 100%;
     bottom: 0px;
@@ -66,10 +78,12 @@ button:focus{
     position: fixed;
     z-index: 0;
 }
-.hd h2{
+
+.hd h2 {
     margin: 0;
 }
-.chatbutton{
+
+.chatbutton {
     padding-top: 12px;
     background: white;
     box-shadow: 0 .5px 1px #00000061;
@@ -77,13 +91,15 @@ button:focus{
     z-index: 1;
     margin: 2px;
 }
-.chatbutton:hover{
+
+.chatbutton:hover {
     background: #ff665961;
     box-shadow: 0 4px 8px #00000061;
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
     z-index: 12;
 }
-.card{
+
+.card {
     box-shadow: 0 .5px 1px #00000061;
     margin: 4px;
     padding: 4px;
@@ -92,37 +108,43 @@ button:focus{
     transition: all 0.25s cubic-bezier(.25,.8,.25,1);
     z-index: 1;
 }
-.material-icons{
-    display: inline; 
+
+.material-icons {
+    display: inline;
     vertical-align: middle;
     margin-right: 8px;
     margin-left: 8px;
     user-select: none;
 }
-.add_chat_screen{
+
+.add_chat_screen {
     position: fixed;
     bottom: -100%;
     transition: all 0.25s cubic-bezier(.25,.8,.25,1);
 }
-.settings_screen{
+
+.settings_screen {
     position: fixed;
     right: -105%;
     top: 0%;
     transition: all 0.25s cubic-bezier(.25,.8,.25,1);
 }
-.profile{
+
+.profile {
     position: fixed;
     left: -105%;
     top: 0%;
     transition: all 0.25s cubic-bezier(.25,.8,.25,1);
 }
-.chat_screen{
+
+.chat_screen {
     position: fixed;
     top: 0%;
     right: -105%;
     transition: all 0.25s cubic-bezier(.25,.8,.25,1);
 }
-.wrappermsg{
+
+.wrappermsg {
     width: 100%;
     padding-top: 16px;
     position: fixed;
@@ -131,13 +153,15 @@ button:focus{
     margin: 0 auto;
     grid-template-columns: 1fr auto;
 }
-.wrapper3{
+
+.wrapper3 {
     width: 100%;
     display: grid;
     margin: 0 auto;
     grid-template-columns: 1fr 1fr 1fr;
 }
-.messagebar{
+
+.messagebar {
     width: 100%;
     bottom: 32px;
     height: 48px;
@@ -145,7 +169,8 @@ button:focus{
     padding: 4px;
     margin: 16px;
 }
-.fib{
+
+.fib {
     margin: 16px;
     margin-top: 24px;
     margin-left: 32px;
@@ -161,11 +186,13 @@ button:focus{
     transition: all 0.25s cubic-bezier(.25,.8,.25,1);
     height: 44px;
 }
-.fib:hover{
+
+.fib:hover {
     background: #ff6659;
     box-shadow: 0 6px 12px #00000061;
 }
-.fab{
+
+.fab {
     transition: all 0.25s cubic-bezier(.25,.8,.25,1);
     background: #d32f2f;
     color: white;
@@ -181,14 +208,17 @@ button:focus{
     padding-right: 10px;
     box-shadow: 0 3px 6px #00000061;
 }
-.fab:hover{
+
+.fab:hover {
     box-shadow: 0 6px 12px #00000061;
     background: #ff6659;
 }
-.fab .material-icons{
+
+.fab .material-icons {
     font-size: 24px;
 }
-.leftbtns{
+
+.leftbtns {
     text-align: left;
     box-shadow: -6px 2px 4px 4px #00000061;
     background: #ffffff;
@@ -198,28 +228,33 @@ button:focus{
     height: 24px;
     padding: 16px;
 }
-.rightbtns{
+
+.rightbtns {
     text-align: right;
     padding: 16px;
     box-shadow: 6px 2px 4px 4px #00000061;
     background: #ffffff;
     height: 24px;
 }
-.centerpiece:before{
+
+.centerpiece:before {
     border-top-left-radius: 100% 48px;
     border-top-right-radius: 100% 48px;
     background: #ffffff
 }
-.action{
+
+.action {
     background: #fafafa;
     z-index: 50;
     height: 100%;
     width: 100%;
 }
-.action:card{
+
+.action:card {
     background: white;
 }
-.bottomnav{
+
+.bottomnav {
     position: fixed;
     bottom: 0px;
     width: 100%;
@@ -230,14 +265,16 @@ button:focus{
     transition: all 0.25s cubic-bezier(.25,.8,.25,1);
     box-shadow: 0 2px 4px #00000061, 0 2px 4px #00000061;
 }
-.g-signin2{
-width: 100%;
+
+.g-signin2 {
+    width: 100%;
 }
 
-.g-signin2 > div{
-margin: 0 auto;
+.g-signin2 > div {
+    margin: 0 auto;
 }
-.deletecon{
+
+.deletecon {
     width: 100%;
     height: 100%;
     position: fixed;
@@ -247,7 +284,8 @@ margin: 0 auto;
     display: none;
     transition: all 0.25s cubic-bezier(.25,.8,.25,1);
 }
-.dialogue{
+
+.dialogue {
     right: 50%;
     position: fixed;
     top: 50%;
@@ -255,27 +293,32 @@ margin: 0 auto;
     width: 232px;
     margin-right: -128px;
     margin-top: -79.5px;
-    border-radius: 4px; 
+    border-radius: 4px;
     box-shadow: 0 12px 24px #00000061;
     background: white;
     display: none;
 }
-.dialogue button{
+
+.dialogue button {
     background: none;
     box-shadow: 0 0 0 #ffffff;
     color: #d32f2f;
     font-size: 15px;
 }
-.dialogue button:hover{
+
+.dialogue button:hover {
     color: #ff6659;
 }
-.dialogue button:focus{
+
+.dialogue button:focus {
     border: none;
 }
-#settings_main{
+
+#settings_main {
     display: none;
 }
-#messages.scroll{
+
+#messages.scroll {
     padding-right: 17px;
     box-sizing: content-box;
     position: fixed;
@@ -283,29 +326,29 @@ margin: 0 auto;
     padding-bottom: 72px;
     padding-top: 56px;
 }
-#noirmode{
+
+#noirmode {
     display: none
 }
-#profilepage.scroll{
+
+#profilepage.scroll {
     height: auto;
     padding-bottom: 72px;
     padding-top: 72px;
 }
-#profilepage{
+
+#profilepage {
     display: none;
 }
-#installbutton{
-    padding: 0px; 
-    padding-right: 4px; 
-    padding-left: 4px; 
-    text-align: left; 
-    display: none;
-    user-select: none;
-    transition: all 0.5s cubic-bezier(.25,.8,.25,1);
-    background: #ff665950
+
+#profile {
+    z-index: 20;
 }
-#installbutton:hover{
-    box-shadow: 0 3px 6px #00000061;
-    background: #d32f2f;
-    color: white;
+
+#add_chat {
+    z-index: 20;
+}
+
+#installbutton {
+    margin-bottom: 36px;
 }
