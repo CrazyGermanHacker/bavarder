@@ -8,3 +8,4 @@ pushkey.key/
 accountcreds.py
 sendnotif.sh
 lightningchat*
+sendmsg.py

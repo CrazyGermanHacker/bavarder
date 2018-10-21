@@ -12,3 +12,10 @@ var config = {
 firebase.initializeApp(config);
 
 const messaging = firebase.messaging()
+
+self.addEventListener('notificationclick', function(event) {
+    if (event.action=="reply"){
+        clients.openWindow("/")
+    }
+    event.notification.close();
+})

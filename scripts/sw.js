@@ -1,4 +1,4 @@
-var CACHE_NAME = 'bavardercsh-6';
+var CACHE_NAME = 'bavardercsh-9';
 var urlsToCache = [
   '/',
   '/material.css',

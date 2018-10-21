@@ -1,20 +1,23 @@
 import web
 import json
-import urllib3
+import os
+import sendmsg
 import httplib2
+import urllib3
 from oauth2client.service_account import ServiceAccountCredentials
 from google.appengine.ext import ndb
+from google.appengine.api import app_identity
+import cloudstorage as gcs
+
 
 def get_at():
-    b=urllib3.request.urlopen("https://bavader.app/lightningchat-1-firebase-adminsdk-zrckh-870350e422.json")
-    credentials = ServiceAccountCredentials.from_json(json.loads(b.read().decode()), 'https://www.googleapis.com/auth/firebase.messaging')
-    access_token_info = credentials.get_access_token()
-    print "Hi"
-    return access_token_info.access_token
+    a=ServiceAccountCredentials.from_json_keyfile_dict(sendmsg.kfdict, "https://www.googleapis.com/auth/firebase.messaging")
+    at=a.get_access_token()
+    return at.access_token
 
 urls=(
     "/", "index",
-    "/sendmsg", "sendmsg",
+    "/sendmsg", "sendmesg",
     "/user","grabcontacts",
     "/rscvmsgs", "grabmessages",
     "/changesetting", "set",
@@ -41,7 +44,6 @@ class user(ndb.Model):
 class index:
     def GET(self):
         x=web.input()
-
         return render.index()
 
     def POST(self):
@@ -64,7 +66,7 @@ class index:
 
         return '<head><meta http-equiv="refresh" content="0; url=/" /></head>'
 
-class sendmsg:
+class sendmesg:
     def POST(self):
         q=user.query()
         results=q.fetch()
@@ -76,20 +78,55 @@ class sendmsg:
             msgnumber=results2[len(results2)-1].number+1
         except:
             msgnumber=0
-        
-        '''data = {
-            "message":{
-                "token" : "eY44lWSDApI:APA91bFOLd3-jQKiLGtXa36PNi5yzyion7Mx-E4JxU_l5szJ7x6DEuHSh40GGM4uML08BwKzxgtuQZwXHYM8AwUzJnakjeNiAJoeCoqdqHx3198zpdeISTnctbvpXZ_4jbt5NUOvxP0q",
-                "notification":{
-                    "body": "Hello World",
-                    "title": "Hello"
+
+        nids = []
+
+        for person in results:
+            if person.user == x.to:
+                for ids in person.notifclientids:
+                    nids.append(ids)
+
+        http = httplib2.Http()
+
+        print nids[0]
+
+        data = {
+            'message':{
+                'token' : '{0}'.format(nids[0]),
+                'notification':{
+                    'body': '{0}'.format(x.message),
+                    'title': '{0}'.format(x.email),
+                },
+                'webpush': {
+                    'fcm_options':{
+                        'link': 'https://bavarder.app',
+                    },
+                    'notification':{
+                        'actions':[
+                            {
+                                'action': 'reply',
+                                'title': 'Reply'
+                            }
+                        ],
+                        'badge': '/favicon.ico'
+                    }
                 }
-            }
+            },
         }
-        
-        
-        httplib2.Http().request("https://fcm.googleapis.com/v1/projects/lightningchat-1/messages:send", method="POST", headers={"Authorization": "Bearer %s" % (get_at())}, body=json.dumps(data))
-'''
+
+        auth = "Bearer " + get_at()
+
+
+        r = http.request(
+            uri="https://fcm.googleapis.com/v1/projects/lightningchat-1/messages:send",
+            method="POST",
+            headers={
+                "Content-Type": "application/json",
+                "Authorization": auth
+            },
+            body=data
+        )
+
 
         message_key = msg(
             emailto=x.to, emailfrom=x.email, message=x.message,  number=msgnumber
@@ -128,15 +165,11 @@ class grabmessages:
                 ),
                 msg.number>int(x.lastnumber)
             ).order(msg.number).fetch()
-            for message in q:
-                print message.emailto
         except:
             return "false"
 
         if len(q) == 0:
             return "false"
-        else:
-            print len(q)
         messages=[]
         messagesloc=[]
         lastnum=int(x.lastnumber)
@@ -192,7 +225,6 @@ class delprof:
     def POST(self):
         x=web.input()
         q=user.query(user.user==x.email).fetch()
-        print q
         q[0].key.delete()
         return "success"
 

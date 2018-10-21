@@ -1,5 +1,6 @@
 $def with(content)
-<html>
+
+<html lang="en">
     <head>
         <title>Bavarder</title>
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -24,6 +25,7 @@ $def with(content)
         <script src="/bavarder.js"></script>
         <script src="/settings.js"></script>
         <script src="/msgscreen.js"></script>
+        <meta name="description" content="Bavarder is a messaging PWA for Google Chrome.">
     </head>
     <body>
         $:content
@@ -67,11 +69,11 @@ $def with(content)
         document.getElementById("emailform2").value=profile.getEmail()
         document.getElementById("email").value=profile.getEmail()
         document.getElementById("signinmsg").style.display="none";
-        document.getElementById("signinbtn").innerHTML="<img src="+profile.getImageUrl()+" style='width: 24; border-radius: 16px; border: 2px solid #d32f2f'>"
+        document.getElementById("signinbtn").innerHTML="<img alt='Profile'src="+profile.getImageUrl()+" style='width: 24; border-radius: 16px; border: 2px solid #d32f2f'>"
         document.getElementById("signinscreen").style.display="none"
         document.getElementById("profilepage").style.display="inline-block"
         document.getElementById("name").innerHTML=profile.getEmail()
-        document.getElementById("profileimg").innerHTML="<img src='"+profile.getImageUrl()+"?sz=1000' style='width: 15vw;'>"
+        document.getElementById("profileimg").innerHTML="<img alt='Profile Settings' src='"+profile.getImageUrl()+"?sz=1000' style='width: 15vw;'>"
         getusersettings(profile.getEmail())
         requestnotifs(messaging)
     };
