@@ -109,9 +109,16 @@ class sendmesg:
                                     'title': 'Reply'
                                 }
                             ],
-                            'badge': '/notificon.ico'
+                            'badge': '/notificon.ico',
+                            'icon': '/icon-512.png' 
                         }
-                    }
+                    },
+                    'android':{
+                        'notification':{
+                            'color': '#d32f2f',
+                            'icon': '/icon-512.png'   
+                        }
+                    },
                 },
             }
 

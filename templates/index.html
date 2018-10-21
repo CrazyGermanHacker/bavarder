@@ -2,7 +2,7 @@ $def with(sdr)
 
 <html lang="en">
     <head>
-        <title>$sdr</title>
+        <title>Bavarder Alpha v1.1.0</title>
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114307532-3"></script>
         <script>
@@ -41,16 +41,16 @@ $def with(sdr)
                     <i class="material-icons" style="font-size: 24px;">person</i>
                 </div>
                 <button id="installbutton">
-                    <i class="material-icons" style="padding: 0px; margin-left: 0px;">get_app</i>
-                    Install App
+                    <i class="material-icons" style="padding: 0px; margin-left: 0px;" id="installicon">get_app</i>
+                    <span style="display: inline" id="installtext">Install App</span>
                 </button>
             </div>
             <div class="rightbtns">
                 <i class="material-icons" style="font-size: 24px;" onclick="opensettings()">settings</i>
             </div>
         </div>
-        <div class="fab" onclick="add_chat_action()">
-            <i class="material-icons">add</i>
+        <div class="fab" onclick="add_chat_action()" id="add_chat_fab">
+            <i class="material-icons">add</i><span style="display: inline;" id="add_chat_fab_text"><b>Add Contact</b></span>
         </div>
 
 
@@ -78,6 +78,10 @@ $def with(sdr)
                     <h2>Profile Settings</h2>
                     <button onclick="opendeletecon()">
                         <b>DELETE PROFILE</b>
+                    </button>
+                    <br />
+                    <button onclick="signOut()" style="margin-top: 4px;">
+                        <b>SIGN OUT</b>
                     </button>
                 </div>
             </div>
@@ -244,9 +248,15 @@ $def with(sdr)
         document.getElementById("signinscreen").style.display = "none"
         document.getElementById("profilepage").style.display = "inline-block"
         document.getElementById("name").innerHTML = profile.getEmail()
-        document.getElementById("profileimg").innerHTML = "<img alt='Profile Settings' src='" + profile.getImageUrl() + "?sz=1000' style='width: 15vw;'>"
+        document.getElementById("profileimg").innerHTML = "<img alt='Profile Settings' id='profilepicture' src='" + profile.getImageUrl() + "?sz=1000' style='width: 15vw;'>"
         getusersettings(profile.getEmail())
         requestnotifs(messaging)
+    }
+    function signOut() {
+        var a2 = gapi.auth2.getAuthInstance()
+        a2.signOut().then(function() {
+            window.location.reload()
+        })
     }
     if ('$sdr'!='') {
         chat_action('$sdr')

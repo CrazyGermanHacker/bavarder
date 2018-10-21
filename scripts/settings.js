@@ -100,4 +100,5 @@ function deleteprof() {
     var em = new FormData(f)
 
     request.send(em)
+    signOut()
 }  

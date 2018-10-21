@@ -14,6 +14,7 @@ firebase.initializeApp(config);
 const messaging = firebase.messaging()
 
 self.addEventListener('notificationclick', function(event) {
+    console.log(event)
     sdr = event.notification.data.FCM_MSG.data.sender
     url = "/?sdr="+sdr
     if (event.action=="reply"){

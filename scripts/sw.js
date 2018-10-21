@@ -1,4 +1,4 @@
-var CACHE_NAME = 'bavardercsh-13';
+var CACHE_NAME = 'bavardercsh-a110';
 var urlsToCache = [
   '/',
   '/material.css',
@@ -35,7 +35,7 @@ self.addEventListener('fetch', function(event) {
 
 self.addEventListener('activate', function(event) {
 
-    var cacheWhitelist = [''];
+    var cacheWhitelist = ['bavardercsh-a110'];
 
     event.waitUntil(
         caches.keys().then(function(cacheNames) {

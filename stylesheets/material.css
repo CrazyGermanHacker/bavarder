@@ -193,12 +193,12 @@ button:focus {
 }
 
 .fab {
-    transition: all 0.25s cubic-bezier(.25,.8,.25,1);
+    transition: all 0.5s cubic-bezier(.25,.8,.25,1);
     background: #d32f2f;
     color: white;
     border-radius: 128px;
     padding-top: 18px;
-    margin-right: -30px;
+    margin-right: -80px;
     position: fixed;
     right: 50%;
     bottom: 28px;
@@ -351,4 +351,10 @@ button:focus {
 
 #installbutton {
     margin-bottom: 36px;
+    display: none;
+}
+
+#profilepicture{
+    margin-top: 16px;
+    border: 1px solid #d32f2f;
 }

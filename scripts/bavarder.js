@@ -1,15 +1,21 @@
 currentscr=0
 var installbtn
 
+
 window.addEventListener(("load"), ()=> {
     installbtn=document.getElementById("installbutton")
+    addbtn=document.getElementById("add_chat_fab")
     let stashedprompt
+
 
     window.addEventListener("beforeinstallprompt", (event)=>{
         event.preventDefault();
 
         stashedprompt=event
-
+        if (window.innerWidth<596){
+            document.getElementById("installtext").style.display="none"
+            document.getElementById("installicon").style="margin: 0px; margin-right: 2px;"
+        }
         installbtn.style.display="inline-block"
     })
 
@@ -124,9 +130,15 @@ function osc(x,y){
     else{
         if (currentscr>document.getElementsByClassName("scroll")[x].scrollTop){
             document.getElementsByClassName("bottomnav")[y].style.bottom="0"
+            
+            document.getElementById("add_chat_fab_text").style.display="inline"
+            document.getElementById("add_chat_fab").style="margin-right: -80; right: 50%;"
         }
         else{
-            document.getElementsByClassName("bottomnav")[y].style.bottom="-64"
+            document.getElementsByClassName("bottomnav")[y].style.bottom="-64"            
+            document.getElementById("add_chat_fab_text").style.display="none"
+            document.getElementById("add_chat_fab").style="margin-right: 0; right: 36px;"
+
         }
         currentscr=document.getElementsByClassName("scroll")[x].scrollTop
     }
