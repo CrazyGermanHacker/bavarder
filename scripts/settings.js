@@ -5,6 +5,7 @@ function toggledark(){
         document.body.style.background="#2e2e2f"
         document.getElementById("messagefld").style.background="#252526"
         document.getElementById("messagefld").style.color="white"
+        document.getElementById("versionnum").style.color="white"
         document.getElementsByClassName("dialogue")[0].style.background="#252526"
         for (var i = 0; i<=document.getElementsByClassName("card").length-1; i++){ document.getElementsByClassName("card")[i].style.background="#252526"; }
         for (var i = 0; i<=document.getElementsByClassName("chatbutton").length-1; i++){ document.getElementsByClassName("chatbutton")[i].style.background="#252526"; }
@@ -34,6 +35,7 @@ function toggleamoleddark(){
     document.body.style.color="white"
     document.body.style.background="#0d0d0d"
     document.getElementById("messagefld").style.background="black"
+    document.getElementById("versionnum").style.color="white"
     document.getElementById("messagefld").style.color="white"
     document.getElementsByClassName("dialogue")[0].style.background="#252526"
     for (var i = 0; i<=document.getElementsByClassName("card").length-1; i++){ document.getElementsByClassName("card")[i].style.background="black"; }
@@ -64,7 +66,17 @@ function getusersettings(email){
         console.log(prs)
         for (var x = 0; x<=prs.contacts.length-1; x++){
             var contact=prs.contacts[x]
-            document.getElementById("users").innerHTML+='<div class="chatbutton" style="text-align: center" onclick="chat_action(\''+contact+'\')" id="'+contact+'">'+contact+'</div>'
+            document.getElementById("users").innerHTML+=
+                '<div class="chatbutton" style="padding: 16px; display: flex; align-items: center; justify-content: center" onclick="chat_action(\''
+                +contact.name+'\')" id="'+contact.name+'"></div>'
+            if (contact.image){
+                document.getElementById(contact.name).innerHTML=
+                    '<img src="'+contact.image+'" style="width: 64px; margin-right: 8px;" /><span style="">'+contact.name+'</span>'   
+            }
+            else{
+                document.getElementById(contact.name).innerHTML=
+                    '<span style="">'+contact.name+'</span>'   
+            }
         }
         if (prs.oleddark==true){
             document.getElementById("noirmode").checked=true;
@@ -102,3 +114,13 @@ function deleteprof() {
     request.send(em)
     signOut()
 }  
+
+function addprof(){
+    var request = new XMLHttpRequest()
+    request.open("POST", "/makeuser", async=true)
+
+    var f = document.getElementById("add_form")
+    var em = new FormData(f)
+
+    request.send(em)
+}

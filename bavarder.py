@@ -21,6 +21,7 @@ urls=(
     "/changesetting", "set",
     "/delprof", "delprof",
     "/associateprof", "allownotifs",
+    "/makeuser", "mkusr"
 )
 
 app=web.application(urls, globals())
@@ -34,6 +35,7 @@ class msg(ndb.Model):
 
 class user(ndb.Model):
     user=ndb.StringProperty()
+    picurl=ndb.StringProperty()
     dark_theme=ndb.BooleanProperty()
     noir=ndb.BooleanProperty()
     contacts=ndb.StringProperty(repeated=True)
@@ -42,7 +44,7 @@ class user(ndb.Model):
 class index:
     def GET(self):
         x=web.input(sdr="")
-        return render.index(x.sdr)
+        return render.index(x.sdr, version="Alpha v1.3.0")
 
     def POST(self):
         x=web.input()
@@ -56,13 +58,24 @@ class index:
                 usr.put()
                 return '<head><meta http-equiv="refresh" content="0; url=/" /></head>'
 
+class mkusr:
+    def POST(self):
+        x = web.input()
+        q=user.query().fetch()
+
+        for human in q:
+            if human.user == x.email:
+                k=human.key.get()
+                k.picurl=x.picurl
+                k.put()
+                return 'profile picture url updated'
+
         userset = user(
-            user=x.email
+            user=x.email, picurl=x.picurl
         )
-        userset.contacts.append(x.user)
         set_key = userset.put()
 
-        return '<head><meta http-equiv="refresh" content="0; url=/" /></head>'
+        return 'user created'
 
 class sendmesg:
     def POST(self):
@@ -78,11 +91,14 @@ class sendmesg:
             msgnumber=0
 
         nids = []
+        picurl = ""
 
         for person in results:
             if person.user == x.to:
                 for ids in person.notifclientids:
                     nids.append(ids)
+            if person.user == x.email:
+                picurl = person.picurl
 
         http = httplib2.Http()
 
@@ -110,13 +126,13 @@ class sendmesg:
                                 }
                             ],
                             'badge': '/notificon.ico',
-                            'icon': '/icon-512.png' 
+                            'icon': '{0}'.format(picurl)
                         }
                     },
                     'android':{
                         'notification':{
                             'color': '#d32f2f',
-                            'icon': '/icon-512.png'   
+                            'icon': '{0}'.format(picurl)
                         }
                     },
                 },
@@ -154,12 +170,20 @@ class grabcontacts:
 
         for y in range(len(results)):
             if results[y].user==x.email:
-                usercontacts=results[y].contacts
+                for contact in results[y].contacts:
+                    for human in results:
+                        if human.user == contact:
+                            usercontacts.append(
+                                {
+                                    'name': contact,
+                                    'image': human.picurl
+                                }
+                            )
                 if results[y].dark_theme==True:
                     darktheme=True
                 if results[y].noir==True:
                     oleddarktheme=True
-
+        print usercontacts
 
         return json.dumps({"contacts":usercontacts, "dark":darktheme, "oleddark":oleddarktheme})
 

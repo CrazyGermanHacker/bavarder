@@ -1,8 +1,8 @@
-$def with(sdr)
+$def with(sdr, version)
 
 <html lang="en">
     <head>
-        <title>Bavarder Alpha v1.1.0</title>
+        <title>Bavarder $version</title>
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114307532-3"></script>
         <script>
@@ -32,7 +32,7 @@ $def with(sdr)
     <body>
         <!--Main Page-->
         <div class="scroll" onscroll="osc(0,0)">
-            <h2 style="text-align: center; color: #d32f2f">Bavarder</h2>
+            <h2 style="text-align: center; color: #d32f2f">Bavarder <span style="color: black" id="versionnum">$version</span></h2>
             <div id="users"></div>
         </div>
         <div class="bottomnav">
@@ -50,7 +50,7 @@ $def with(sdr)
             </div>
         </div>
         <div class="fab" onclick="add_chat_action()" id="add_chat_fab">
-            <i class="material-icons">add</i><span style="display: inline;" id="add_chat_fab_text"><b>Add Contact</b></span>
+            <i class="material-icons">add</i><span style="display: inline; padding-right: 8px" id="add_chat_fab_text"><b>Add Contact</b></span>
         </div>
 
 
@@ -122,6 +122,7 @@ $def with(sdr)
                     <input type="text" name="user" placeholder="username" id="unameip"/>
                     <input type="hidden" name="email" id="email"/>
                     <input type="hidden" name="notifid" id="notifid"/>
+                    <input type="hidden" name="picurl" id="picurl"/>
                     <br/>
                     <br/>
                     <button type="submit" id="add_btn" style="background: lightgrey; color: black" disabled>
@@ -178,6 +179,16 @@ $def with(sdr)
         </div>
 
 
+        <!--Notifications Screen-->
+
+        <div class="notif_screen action">
+            <div class="hd">
+                <h2>
+                    <i class="material-icons" style="font-size: 32px" onclick="back_notifs_action()">arrow_back</i>
+                    Notifications
+                </h2>
+            </div>
+        </div>
         
         <!--Chat Screen-->
         <div class="chat_screen action">
@@ -199,7 +210,9 @@ $def with(sdr)
                     </form>
                 </div>
                 <div class="fib" onclick="waittosend()">
-                    <i class="material-icons" style="font-size: 32px">send</i>
+                    <div id="fibtext">
+                        <i class="material-icons" style="font-size: 32px">send</i>
+                    </div>
                 </div>
             </div>
         </div>
@@ -228,19 +241,12 @@ $def with(sdr)
     function onSignIn(googleUser) {
         // Useful data for your client-side scripts:
         var profile = googleUser.getBasicProfile();
-        console.log("ID: " + profile.getId());
-        // Don't send this directly to your server!
-        console.log('Full Name: ' + profile.getName());
-        console.log('Given Name: ' + profile.getGivenName());
-        console.log('Family Name: ' + profile.getFamilyName());
-        console.log("Image URL: " + profile.getImageUrl());
-        console.log("Email: " + profile.getEmail());
 
         // The ID token you need to pass to your backend:
         var id_token = googleUser.getAuthResponse().id_token;
-        console.log("ID Token: " + id_token);
         document.getElementById("settings_main").style.display = "inline-block";
         document.getElementById("emailform").value = profile.getEmail()
+        document.getElementById("picurl").value = profile.getImageUrl()
         document.getElementById("emailform2").value = profile.getEmail()
         document.getElementById("email").value = profile.getEmail()
         document.getElementById("signinmsg").style.display = "none";
@@ -250,6 +256,7 @@ $def with(sdr)
         document.getElementById("name").innerHTML = profile.getEmail()
         document.getElementById("profileimg").innerHTML = "<img alt='Profile Settings' id='profilepicture' src='" + profile.getImageUrl() + "?sz=1000' style='width: 15vw;'>"
         getusersettings(profile.getEmail())
+        addprof()
         requestnotifs(messaging)
     }
     function signOut() {

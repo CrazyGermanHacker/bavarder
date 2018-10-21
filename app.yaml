@@ -9,6 +9,8 @@ handlers:
   script: bavarder.app
 - url: /sendmsg
   script: bavarder.app
+- url: /makeuser
+  script: bavarder.app
 - url: /user
   script: bavarder.app
 - url: /rscvmsgs

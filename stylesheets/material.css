@@ -130,6 +130,12 @@ button:focus {
     transition: all 0.25s cubic-bezier(.25,.8,.25,1);
 }
 
+.notif_screen{
+    position: fixed;
+    background: #fafafa;
+    bottom: -100%;
+}
+
 .profile {
     position: fixed;
     left: -105%;
@@ -183,7 +189,7 @@ button:focus {
     border-radius: 128px;
     width: 52px;
     color: white;
-    transition: all 0.25s cubic-bezier(.25,.8,.25,1);
+    transition: all 250ms cubic-bezier(0.25, 0.8, 0.25, 1) 0ms;
     height: 44px;
 }
 

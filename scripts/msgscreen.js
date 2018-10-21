@@ -2,7 +2,11 @@ alreadyrunning=false
 
 function sendfinished(){
     var jsparsed = JSON.parse(this.responseText)
-    document.getElementById("messagefld").value="";
+    document.getElementById("messages").scrollTop=document.getElementById("messages").scrollHeight
+    document.getElementsByClassName("fib")[0].style="";
+    document.getElementById("fibtext").innerHTML='<i class="material-icons" style="font-size: 32px">send</i>'
+    var f = document.getElementById("messagefld").style.display="inline-block";
+    document.getElementsByClassName("fib")[0].onClick="waittosend()"
 }
 function sendpushed(){
     return new Promise((resolve, reject) => {
@@ -17,11 +21,24 @@ function sendpushed(){
 async function waittosend(){
     await sendpushed().then(function(message){
         var request = new XMLHttpRequest()
-        request.open("POST", "/sendmsg", async=true)
-        request.addEventListener("load", sendfinished)
         var f = document.getElementById("messagefield")
         var fd = new FormData(f)
+
+        document.getElementsByClassName("fib")[0].style=
+            "background: lightgrey; color: black; position: fixed; bottom: 16px; left: 0px; width: 100%; margin: 0px; padding-right: 8px; padding-left: 8px; border-radius: 0px;";
+        document.getElementById("fibtext").innerHTML="<b>Sending</b>"
+        document.getElementsByClassName("fib")[0].onClick = 'console.log("Already Sending")'
+        request.open("POST", "/sendmsg", async=true)
+        request.addEventListener("load", sendfinished)
+
+
+        document.getElementById("messagefld").value="";
+        document.getElementById("messagefld").style.display="none";
+        console.log('sent')
+
         request.send(fd)
+    }).catch(function(err) {
+        console.log("nothing to send")
     })
 }
 
