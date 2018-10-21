@@ -3,12 +3,6 @@ alreadyrunning=false
 function sendfinished(){
     var jsparsed = JSON.parse(this.responseText)
     document.getElementById("messagefld").value="";
-    document.getElementById("lastnumber").value = parseInt(document.getElementById("lastnumber").value)+1
-    document.getElementById("messages").innerHTML+=
-        "<div class='wrapper3'><div></div><div></div><div class='card' style='border-radius:16px'>"+jsparsed.msg+"</div></div>";
-        if (document.getElementById("darktoggle").checked==true){
-            toggledark()
-        }
 }
 function sendpushed(){
     return new Promise((resolve, reject) => {
@@ -33,14 +27,8 @@ async function waittosend(){
 
 function recieve(){
     request = new XMLHttpRequest()
-    request.open("POST", "/rscvmsgs", async=true)
-
-    request.addEventListener("progress", function(){
-        alreadyrunning=true
-    })
-
+    request.open("POST", "/rscvmsgs")
     request.addEventListener("load", function(){
-        alreadyrunning=false
         if (this.responseText!="false"){
             var messages=JSON.parse(this.responseText)
             document.getElementById("lastnumber").value=messages.lastnum
@@ -63,7 +51,20 @@ function recieve(){
                 }
             }
             document.getElementById("messages").scrollTop=document.getElementById("messages").scrollHeight
-            
+            if (document.getElementsByClassName("chat_screen")[0].style.right=="0%"){
+                setTimeout( function(){
+                    recieve()
+                },
+                300)
+            }
+        }
+        else{
+            if (document.getElementsByClassName("chat_screen")[0].style.right=="0%"){
+                setTimeout( function(){
+                    recieve()
+                },
+                300)
+            }
         }
     })
 
@@ -72,13 +73,6 @@ function recieve(){
     var fd = new FormData(f)
 
     request.send(fd)
-
-    if ((document.getElementsByClassName("chat_screen")[0].style.right=="0%") && (alreadyrunning!=true)){
-        setTimeout( function(){
-            recieve()
-        },
-        300)
-    }
 }
 
 function chat_action(name){
@@ -92,13 +86,6 @@ function chat_action(name){
     document.getElementsByClassName("chat_screen")[0].style.transition="all 0.3s cubic-bezier(.25,.8,.25,1)";
     console.log(parseInt(document.getElementById("lastnumber").value))
     document.getElementById("lastnumber").value=-1;
-    request = new XMLHttpRequest()
-    request.open("POST", "/rscvmsgs", async=true)
-    document.getElementById("messages").innerHTML=" "
-    document.getElementById("messagecount").value=document.getElementById("messages").children.length
-    var f = document.getElementById("messagefield")
-    var fd = new FormData(f)
-    request.send(fd)
     recieve()
 }
 function back_chat_action(){
