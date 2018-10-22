@@ -1,6 +1,9 @@
 currentscr=0
 var installbtn
 
+if (navigator.onLine!=true) {
+    console.log("offline")
+}
 
 window.addEventListener(("load"), ()=> {
     installbtn=document.getElementById("installbutton")

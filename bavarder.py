@@ -8,6 +8,8 @@ from oauth2client.service_account import ServiceAccountCredentials
 from google.appengine.ext import ndb
 from google.appengine.api import app_identity
 
+version = "Beta v0.1.0"
+
 def get_at():
     a=ServiceAccountCredentials.from_json_keyfile_dict(sendmsg.kfdict, "https://www.googleapis.com/auth/firebase.messaging")
     at=a.get_access_token()
@@ -15,6 +17,7 @@ def get_at():
 
 urls=(
     "/", "index",
+    "/changelog", "clog",
     "/sendmsg", "sendmesg",
     "/user","grabcontacts",
     "/rscvmsgs", "grabmessages",
@@ -44,7 +47,7 @@ class user(ndb.Model):
 class index:
     def GET(self):
         x=web.input(sdr="")
-        return render.index(x.sdr, version="Alpha v1.3.0")
+        return render.index(x.sdr, version)
 
     def POST(self):
         x=web.input()
@@ -57,6 +60,10 @@ class index:
                 usr.contacts.append(x.user)
                 usr.put()
                 return '<head><meta http-equiv="refresh" content="0; url=/" /></head>'
+
+class clog:
+    def GET(self):
+        return render.clog(version)
 
 class mkusr:
     def POST(self):

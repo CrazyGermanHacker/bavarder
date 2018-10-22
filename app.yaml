@@ -5,6 +5,8 @@ threadsafe: true
 handlers:
 - url: /
   script: bavarder.app
+- url: /changelog
+  script: bavarder.app
 - url: /changesetting
   script: bavarder.app
 - url: /sendmsg

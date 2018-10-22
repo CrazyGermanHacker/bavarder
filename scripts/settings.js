@@ -1,3 +1,24 @@
+window.addEventListener("load", function () {
+    if (navigator.onLine!=true){
+        var stored = localStorage['contacts']
+        contacts = JSON.parse(stored)
+        for (var x = 0; x<=contacts.length-1; x++){
+            var contact=contacts[x]
+            document.getElementById("users").innerHTML+=
+                '<div class="chatbutton" style="padding: 16px; display: flex; align-items: center; justify-content: center" onclick="chat_action(\''
+                +contact.name+'\')" id="'+contact.name+'"></div>'
+            if (contact.image){
+                document.getElementById(contact.name).innerHTML=
+                    '<img src="'+contact.image+'" style="width: 64px; margin-right: 8px;" /><span style="">'+contact.name+'</span>'   
+            }
+            else{
+                document.getElementById(contact.name).innerHTML=
+                    '<span style="">'+contact.name+'</span>'   
+            }
+        }
+    }
+  
+})
 function toggledark(){
     if (document.getElementById("noirmode").checked==false){
         document.getElementById("darktoggle").checked=true
@@ -64,6 +85,7 @@ function getusersettings(email){
     request.addEventListener("load", function() {
         var prs = JSON.parse(this.responseText)
         console.log(prs)
+        localStorage['contacts'] = JSON.stringify(prs.contacts)
         for (var x = 0; x<=prs.contacts.length-1; x++){
             var contact=prs.contacts[x]
             document.getElementById("users").innerHTML+=

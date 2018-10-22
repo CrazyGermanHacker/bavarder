@@ -49,7 +49,7 @@ function recieve(){
         if (this.responseText!="false"){
             var messages=JSON.parse(this.responseText)
             document.getElementById("lastnumber").value=messages.lastnum
-
+            storemessages('messagesfrom'+document.getElementById("toform").value, messages)
             for (var i = 0; i<=messages.messages.length-1; i++){
                 if (messages.loc[i]==true){
                     document.getElementById("messages").innerHTML+=
@@ -103,10 +103,75 @@ function chat_action(name){
     document.getElementsByClassName("chat_screen")[0].style.transition="all 0.3s cubic-bezier(.25,.8,.25,1)";
     console.log(parseInt(document.getElementById("lastnumber").value))
     document.getElementById("lastnumber").value=-1;
-    recieve()
+    if (navigator.onLine==true){
+        recieve()
+    }
+    else{
+        d = localStorage['messagesfrom'+document.getElementById("toform").value]
+
+
+
+        document.getElementsByClassName("fib")[0].style=
+            "background: lightgrey; color: black; position: fixed; bottom: 16px; left: 0px; width: 100%; margin: 0px; padding-right: 8px; padding-left: 8px; border-radius: 0px;";
+        document.getElementById("fibtext").innerHTML="<b>Offline</b>"
+        document.getElementsByClassName("fib")[0].onClick = null
+        document.getElementById("messagefld").style.display="none";
+
+
+        if (d) {
+            messages=JSON.parse(d)
+
+            for (var x = 0; x<=messages.messages.length-1; x++) {
+                if (messages.loc[x]==true){
+                    document.getElementById("messages").innerHTML+=
+                        "<div class='wrapper3'><div></div><div></div><div class='card' style='border-radius:16px'>"+
+                        messages.messages[x]+
+                        "</div></div>";
+                }
+                else{
+                    document.getElementById("messages").innerHTML+=
+                        "<div class='wrapper3'><div class='card' style='border-radius:16px'>"+
+                        messages.messages[x]+
+                        "</div><div></div><div></div></div>";
+                }
+                if (document.getElementById("darktoggle").checked==true){
+                    toggledark()
+                }
+            }
+        }
+    }
 }
+
 function back_chat_action(){
-    document.getElementById("lastnumber").value=-1;
+    document.getElementsByClassName("fib")[0].style="";
+    document.getElementById("fibtext").innerHTML='<i class="material-icons" style="font-size: 32px">send</i>'
+    var f = document.getElementById("messagefld").style.display="inline-block";
+    document.getElementsByClassName("fib")[0].onClick="waittosend()"
     document.getElementById("messages").innerHTML=" "
     document.getElementsByClassName("chat_screen")[0].style.right="-105%";
+    document.getElementById("lastnumber").value=-1;
+}
+
+function storemessages(store, messages){
+    if (localStorage[store]){
+        var dat=localStorage[store]
+        var data=JSON.parse(dat)
+
+        if (messages.lastnum>data.lastnum){
+            data.lastnum=messages.lastnum
+            for (var x = 0; x <= messages.messages.length-1; x++) { 
+                data.messages[data.messages.length]=messages.messages[x] 
+                data.loc[data.loc.length] = messages.loc[x]
+            }
+            localStorage[store]=JSON.stringify(data)
+        }
+    }
+    else{
+        var messagedata = {'messages':[], 'loc':[], 'lastnum':messages.lastnum};
+        for (var x = 0; x <= messages.messages.length-1; x++) {
+            messagedata.messages[messagedata.messages.length]= messages.messages[x]
+            messagedata.loc[messagedata.loc.length] = messages.loc[x]
+        }
+        localStorage[store]=JSON.stringify(messagedata)
+    }
 }
