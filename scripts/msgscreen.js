@@ -138,6 +138,7 @@ function chat_action(name){
                     toggledark()
                 }
             }
+            document.getElementById("messages").scrollTop=document.getElementById("messages").scrollHeight
         }
     }
 }
