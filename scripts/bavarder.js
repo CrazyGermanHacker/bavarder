@@ -1,5 +1,6 @@
 currentscr=0
 var installbtn
+var notifs = []
 
 if (navigator.onLine!=true) {
     console.log("offline")
@@ -153,16 +154,25 @@ function osc(x,y){
     }
     else{
         if (currentscr>document.getElementsByClassName("scroll")[x].scrollTop){
-            document.getElementsByClassName("bottomnav")[y].style.bottom="0"
+            document.getElementsByClassName("bottomnav")[y].style.bottom="0px"
             
             document.getElementById("add_chat_fab_text").style.display="inline"
             document.getElementById("add_chat_fab").style="margin-right: -80; right: 50%;"
+            if (document.getElementsByClassName("scroll")[0].scrollTop>=36){
+                document.getElementById("search_fab").style.bottom="72px"
+            }
         }
         else{
-            document.getElementsByClassName("bottomnav")[y].style.bottom="-64"            
+            document.getElementsByClassName("bottomnav")[y].style.bottom="-64px"            
             document.getElementById("add_chat_fab_text").style.display="none"
             document.getElementById("add_chat_fab").style="margin-right: 0; right: 24px; bottom: 24px;"
-
+            if (document.getElementsByClassName("scroll")[0].scrollTop>=36){
+                document.getElementById("search_fab").style.bottom="96px"
+                document.getElementById("search_fab").style.right="24px"
+            }
+        }
+        if (document.getElementsByClassName("scroll")[0].scrollTop<36){
+            document.getElementById("search_fab").style.right="-64px"
         }
         currentscr=document.getElementsByClassName("scroll")[x].scrollTop
     }
@@ -181,4 +191,25 @@ function opendeletecon() {
 function hidedeletecon() {
     document.getElementsByClassName("deletecon")[0].style.display="none"
     document.getElementsByClassName("dialogue")[0].style.display="none"
+}
+
+
+
+// notification screen
+
+function notifAction() {
+    document.getElementById("notif_screen").style.right="0%"
+    document.getElementById("ctnotifs").innerHTML=""
+    for (var i = 0; i<notifs.length; i++) {
+        document.getElementById("ctnotifs").innerHTML+=
+            "<div class='card'><h3>"+notifs[i].notification.title+"<h3><p>"+notifs[i].notification.body+"</p></div>"
+    }
+}
+
+function back_notifs_action() {
+    document.getElementById("notif_screen").style.right="-105%"
+}
+
+function addtonotifs(msg) {
+    notifs[notifs.length]=msg
 }

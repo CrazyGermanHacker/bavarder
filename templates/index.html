@@ -1,5 +1,5 @@
 $def with(sdr, version)
-
+<!doctype HTML>
 <html lang="en">
     <head>
         <title>Bavarder $version</title>
@@ -32,10 +32,10 @@ $def with(sdr, version)
     <body>
         <!--Main Page-->
         <div class="scroll" onscroll="osc(0,0)">
-            <div class="wrapper3" style="grid-template-columns: 56px 1fr 56px;">
+            <div class="wrapperhd" style="grid-template-columns: 56px 1fr 56px;">
                 <div></div>
                 <h2 style="text-align: center; color: #d32f2f">Bavarder <span style="color: black" id="versionnum" onclick="window.location.href='/changelog'">$version</span></h2>
-                <div><!--<i class="material-icons" style="margin-top: 24px; margin-right: 24px;">search</i>--></div>
+                <div><i class="material-icons" style="margin-top: 24px; margin-right: 24px;" onclick="openSearch()">search</i></div>
             </div>
             <div id="users"></div>
         </div>
@@ -50,11 +50,29 @@ $def with(sdr, version)
                 </button>
             </div>
             <div class="rightbtns">
+                <div></div>
+                <i class="material-icons" onclick="notifAction()">notifications</i>
                 <i class="material-icons" style="font-size: 24px;" onclick="opensettings()">settings</i>
             </div>
         </div>
         <div class="fab" onclick="add_chat_action()" id="add_chat_fab">
             <i class="material-icons">add</i><span style="display: inline; padding-right: 8px" id="add_chat_fab_text"><b>Add Contact</b></span>
+        </div>
+        <div class="fab" onclick="openSearch()" id="search_fab" style="margin-right: 0; right: -64px; bottom: 96px; background: #d32f2f; color: white;">
+            <i class="material-icons">search</i>
+        </div>
+
+
+
+
+
+        <!--Search-->
+        <div class="search action" id="search">
+            <div class="card wrappersearch" style="text-align: left; margin-top: 8px;">
+                <i class="material-icons" style="font-size: 24px; margin-top: 12px;" onclick="backSearch()">arrow_back</i>
+                <input type="text" id="searchinput" style="box-shadow: 0 0 0 #00000000; text-align: left;" class="card" placeholder="Search" />
+            </div>
+            <div class="scroll" style="position: relative" id="results"></div>
         </div>
 
 
@@ -183,16 +201,24 @@ $def with(sdr, version)
         </div>
 
 
-        <!--Notifications Screen-->
 
-        <div class="notif_screen action">
+
+
+        <!--Notifications Screen-->
+        <div class="notif_screen action" id="notif_screen">
             <div class="hd">
                 <h2>
                     <i class="material-icons" style="font-size: 32px" onclick="back_notifs_action()">arrow_back</i>
                     Notifications
                 </h2>
             </div>
+            <div class="scroll" style="top: 64px;" id="ctnotifs"></div>
         </div>
+
+
+
+
+
         
         <!--Chat Screen-->
         <div class="chat_screen action">
@@ -238,7 +264,7 @@ $def with(sdr, version)
     const messaging = firebase.messaging()
 
     messaging.onMessage(function(message) {
-        console.log(message)
+        addtonotifs(message)
     })
 </script>
 <script>
@@ -254,7 +280,7 @@ $def with(sdr, version)
         document.getElementById("emailform2").value = profile.getEmail()
         document.getElementById("email").value = profile.getEmail()
         document.getElementById("signinmsg").style.display = "none";
-        document.getElementById("signinbtn").innerHTML = "<img alt='Profile'src=" + profile.getImageUrl() + " style='width: 24; border-radius: 16px; border: 2px solid #d32f2f'>"
+        document.getElementById("signinbtn").innerHTML = "<img alt='Profile'src=" + profile.getImageUrl() + " style='width: 24px; border-radius: 16px; border: 2px solid #d32f2f'>"
         document.getElementById("signinscreen").style.display = "none"
         document.getElementById("profilepage").style.display = "inline-block"
         document.getElementById("name").innerHTML = profile.getEmail()

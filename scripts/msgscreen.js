@@ -53,13 +53,13 @@ function recieve(){
             for (var i = 0; i<=messages.messages.length-1; i++){
                 if (messages.loc[i]==true){
                     document.getElementById("messages").innerHTML+=
-                        "<div class='wrapper3'><div></div><div></div><div class='card' style='border-radius:16px; word-wrap: break-word;'>"+
+                        "<div class='wrapper3' style='justify-items: end;'><div></div><div></div><div class='card msg'>"+
                         messages.messages[i]+
                         "</div></div>";
                 }
                 else{
                     document.getElementById("messages").innerHTML+=
-                        "<div class='wrapper3'><div class='card' style='border-radius:16px; word-wrap: break-word; max-width: 33%;'>"+
+                        "<div class='wrapper3'><div class='card msg'>"+
                         messages.messages[i]+
                         "</div><div></div><div></div></div>";
                 }
@@ -124,13 +124,13 @@ function chat_action(name){
             for (var x = 0; x<=messages.messages.length-1; x++) {
                 if (messages.loc[x]==true){
                     document.getElementById("messages").innerHTML+=
-                        "<div class='wrapper3'><div></div><div></div><div class='card' style='border-radius:16px; word-wrap: break-word; max-width: 33%;'>"+
+                        "<div class='wrapper3'><div></div><div></div><div class='card msg'>"+
                         messages.messages[x]+
                         "</div></div>";
                 }
                 else{
                     document.getElementById("messages").innerHTML+=
-                        "<div class='wrapper3'><div class='card' style='border-radius:16px; word-wrap: break-word; max-width: 33%;'>"+
+                        "<div class='wrapper3'><div class='card msg'>"+
                         messages.messages[x]+
                         "</div><div></div><div></div></div>";
                 }
