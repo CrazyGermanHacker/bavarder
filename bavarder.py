@@ -8,7 +8,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 from google.appengine.ext import ndb
 from google.appengine.api import app_identity
 
-version = "Beta v0.1.1"
+version = "Beta v0.2.3"
 
 def get_at():
     a=ServiceAccountCredentials.from_json_keyfile_dict(sendmsg.kfdict, "https://www.googleapis.com/auth/firebase.messaging")

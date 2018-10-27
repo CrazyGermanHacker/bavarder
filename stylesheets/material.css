@@ -7,7 +7,7 @@ body, html {
     margin: 0;
     padding: 0;
     height: 100%;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Questrial', sans-serif;
     overflow: hidden;
     transition: all 0.25s cubic-bezier(.25,.8,.25,1);
     background: #fafafa;
@@ -27,7 +27,7 @@ a:hover {
 input {
     border: 1px solid black;
     border-radius: 4px;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Questrial', sans-serif;
     padding: 4px;
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
@@ -41,7 +41,7 @@ button {
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
     background: #d32f2f;
     color: white;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Questrial', sans-serif;
     border: none;
     border-radius: 4px;
     box-shadow: 0 1px 2px #00000061;
@@ -49,11 +49,6 @@ button {
     padding-right: 16px;
     padding-left: 16px;
     font-size: 16px;
-}
-
-button:hover {
-    background-color: #ff6659;
-    box-shadow: 0 3px 6px #00000061;
 }
 
 button:focus {
@@ -103,6 +98,7 @@ button:focus {
     box-shadow: 0 .5px 1px #00000061;
     margin: 4px;
     padding: 4px;
+    word-wrap: break-word;
     text-align: center;
     background: white;
     transition: all 0.25s cubic-bezier(.25,.8,.25,1);
@@ -184,24 +180,24 @@ button:focus {
     text-align: center;
     padding-top: 12px;
     padding-left: 4px;
-    background: #d32f2f;
+    background: #ef9a9a;
     box-shadow: 0 3px 6px #00000061;
     border-radius: 128px;
     width: 52px;
-    color: white;
+    color: black;
     transition: all 250ms cubic-bezier(0.25, 0.8, 0.25, 1) 0ms;
     height: 44px;
 }
 
 .fib:hover {
-    background: #ff6659;
+    background: #ffcccb;
     box-shadow: 0 6px 12px #00000061;
 }
 
 .fab {
     transition: all 0.5s cubic-bezier(.25,.8,.25,1);
-    background: #d32f2f;
-    color: white;
+    background: #ef9a9a;
+    color: black;
     border-radius: 128px;
     padding-top: 18px;
     margin-right: -80px;
@@ -217,7 +213,7 @@ button:focus {
 
 .fab:hover {
     box-shadow: 0 6px 12px #00000061;
-    background: #ff6659;
+    background: #ffcccb;
 }
 
 .fab .material-icons {
@@ -227,7 +223,7 @@ button:focus {
 .leftbtns {
     text-align: left;
     box-shadow: -6px 2px 4px 4px #00000061;
-    background: #ffffff;
+    background: #d32f2f;
     width: 100%;
     display: grid;
     grid-template-columns: 36px max-content 1fr;
@@ -239,7 +235,7 @@ button:focus {
     text-align: right;
     padding: 16px;
     box-shadow: 6px 2px 4px 4px #00000061;
-    background: #ffffff;
+    background: #d32f2f;
     height: 24px;
 }
 
@@ -265,8 +261,9 @@ button:focus {
     bottom: 0px;
     width: 100%;
     display: grid;
+    background: #d32f2f;
     grid-template-columns: 1fr 1fr;
-    color: black;
+    color: white;
     font-size: 24px;
     transition: all 250ms cubic-bezier(0.25, 0.8, 0.25, 1) 0ms;
     box-shadow: 0 2px 4px #00000061, 0 2px 4px #00000061;

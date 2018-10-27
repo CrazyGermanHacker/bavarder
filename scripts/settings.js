@@ -98,7 +98,7 @@ function getusersettings(email){
             else{
                 document.getElementById(contact.name).innerHTML=
                     '<span style="">'+contact.name+'</span>'   
-            }
+            }   
         }
         if (prs.oleddark==true){
             document.getElementById("noirmode").checked=true;

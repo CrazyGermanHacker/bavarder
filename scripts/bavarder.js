@@ -5,10 +5,31 @@ if (navigator.onLine!=true) {
     console.log("offline")
 }
 
-window.addEventListener(("load"), ()=> {
+window.addEventListener(("load"), function() {
     installbtn=document.getElementById("installbutton")
     addbtn=document.getElementById("add_chat_fab")
     let stashedprompt
+    for (var x = 0; x<=document.getElementsByTagName("button").length-1; x++){
+        var btn = document.getElementsByTagName("button")[x]
+        btn.addEventListener("mousedown", function () {
+            btn.style.background="#ff6659" 
+            btn.style.boxShadow="0 3px 6px #00000061"
+        })
+        btn.addEventListener("mouseup", function () {
+            btn.style.background="#d32f2f" 
+            btn.style.boxShadow="0 1px 2px #00000061"
+        })
+        btn.addEventListener("mouseout", function () {
+            btn.style.background="#d32f2f" 
+            btn.style.boxShadow="0 1px 2px #00000061"
+        })
+        btn.addEventListener("touchstart", function () {
+            btn.style="background-color: #ff6659; box-shadow: 0 3px 6px #00000061;"
+        })
+        btn.addEventListener("touchend", function () {
+            btn.style=""
+        })
+    }
 
 
     window.addEventListener("beforeinstallprompt", (event)=>{
@@ -140,7 +161,7 @@ function osc(x,y){
         else{
             document.getElementsByClassName("bottomnav")[y].style.bottom="-64"            
             document.getElementById("add_chat_fab_text").style.display="none"
-            document.getElementById("add_chat_fab").style="margin-right: 0; right: 36px;"
+            document.getElementById("add_chat_fab").style="margin-right: 0; right: 24px; bottom: 24px;"
 
         }
         currentscr=document.getElementsByClassName("scroll")[x].scrollTop
