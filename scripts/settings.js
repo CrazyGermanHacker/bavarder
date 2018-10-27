@@ -77,18 +77,16 @@ function getusersettings(email){
         contacts = prs.contacts
         for (var x = 0; x<=prs.contacts.length-1; x++){
             var contact=prs.contacts[x]
-            for (var i = 0; i<=100; i++) {
-                document.getElementById("users").innerHTML+=
-                '<div class="chatbutton" style="padding: 16px; display: flex; align-items: center; justify-content: center" onclick="chat_action(\''
-                +contact.name+'\')" id="'+contact.name+'"></div>'
-                if (contact.image){
-                    document.getElementById(contact.name).innerHTML=
-                        '<img src="'+contact.image+'" style="width: 64px; margin-right: 8px;" /><span style="">'+contact.name+'</span>'   
-                }
-                else{
-                    document.getElementById(contact.name).innerHTML=
-                        '<span style="">'+contact.name+'</span>'   
-                }   
+            document.getElementById("users").innerHTML+=
+            '<div class="chatbutton" style="padding: 16px; display: flex; align-items: center; justify-content: center" onclick="chat_action(\''
+            +contact.name+'\')" id="'+contact.name+'"></div>'
+            if (contact.image){
+                document.getElementById(contact.name).innerHTML=
+                    '<img src="'+contact.image+'" style="width: 64px; margin-right: 8px;" /><span style="">'+contact.name+'</span>'   
+            }
+            else{
+                document.getElementById(contact.name).innerHTML=
+                    '<span style="">'+contact.name+'</span>'    
             }
         }
         if (prs.oleddark==true){

@@ -1,4 +1,4 @@
-var CACHE_NAME = 'bavardercsh-b04';
+var CACHE_NAME = 'bavardercsh-b041';
 var urlsToCache = [
   '/',
   '/changelog',
@@ -36,7 +36,7 @@ self.addEventListener('fetch', function(event) {
 
 self.addEventListener('activate', function(event) {
 
-    var cacheWhitelist = ['bavardercsh-b04'];
+    var cacheWhitelist = ['bavardercsh-b041'];
 
     event.waitUntil(
         caches.keys().then(function(cacheNames) {
