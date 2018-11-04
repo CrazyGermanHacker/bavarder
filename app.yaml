@@ -38,6 +38,9 @@ handlers:
 - url: /icon-512.png
   static_files: static/icon-512.png
   upload: static/icon-512.png
+- url: /icon-apple.png
+  static_files: static/icon-apple.png
+  upload: static/icon-apple.png
 - url: /bavarder.js
   static_files: scripts/bavarder.js
   upload: scripts/bavarder.js
