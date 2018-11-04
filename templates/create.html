@@ -1,8 +1,7 @@
-$def with(version)
-
-<html lang="en">
+<!DOCTYPE html>
+<html>
     <head>
-        <title>Bavarder $version Changelog</title>
+        <title>Create Account</title>
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114307532-3"></script>
         <script>
@@ -14,10 +13,9 @@ $def with(version)
 
             gtag('config', 'UA-114307532-3');
         </script>
-        <link href="https://fonts.googleapis.com/css?family=Questrial" rel="stylesheet">
-        <meta name="theme-color" content="#d32f2f">
-        <link href="/material.css" type="text/css" rel="stylesheet">
-        <link href="/toggle-md.css" type="text/css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+        <meta name="theme-color" content="#1565c0">
+        <link href="https://stormprograms.com/material.css" type="text/css" rel="stylesheet">
         <link rel="manifest" href="/manifest.webmanifest">
         <script src="https://apis.google.com/js/platform.js" async defer></script>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -25,11 +23,21 @@ $def with(version)
         <meta name="description" content="Bavarder is a messaging PWA for Google Chrome.">
     </head>
     <body>
-        <div class="hd" style="background: #d32f2f; color: white">
-            <h2><i class="material-icons" onclick="window.location.href='/'">arrow_back</i>$version Changelog</h2>
+        <div class="hd" style="background: #1565c0; color: white; padding-bottom: 10.5px;">
+            Storm Programs: Bavarder
         </div>
+
         <div class="card">
-            <h3>What's New</h3>
-            <p>Custom Sign In</p>
+            <h3>Create Account</h3>
+            <form method="POST">
+                <input id="email" name="email" placeholder="email" />
+                <br>
+                <br>
+                <input id="pswd" name="pswd" placeholder="password" autocomplete="current-password" type="password" />
+                <br>
+                <br>
+                <button type="submit">CREATE ACCOUNT</button>
+            </form>
+        </div>
     </body>
 </html>

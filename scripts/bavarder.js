@@ -12,22 +12,22 @@ window.addEventListener(("load"), function() {
     let stashedprompt
     for (var x = 0; x<=document.getElementsByTagName("button").length-1; x++){
         var btn = document.getElementsByTagName("button")[x]
-        btn.addEventListener("mousedown", function () {
+        document.getElementsByTagName("button")[x].addEventListener("mousedown", function () {
             btn.style.background="#ff6659" 
             btn.style.boxShadow="0 3px 6px #00000061"
         })
-        btn.addEventListener("mouseup", function () {
+        document.getElementsByTagName("button")[x].addEventListener("mouseup", function () {
             btn.style.background="#d32f2f" 
             btn.style.boxShadow="0 1px 2px #00000061"
         })
-        btn.addEventListener("mouseout", function () {
+        document.getElementsByTagName("button")[x].addEventListener("mouseout", function () {
             btn.style.background="#d32f2f" 
             btn.style.boxShadow="0 1px 2px #00000061"
         })
-        btn.addEventListener("touchstart", function () {
+        document.getElementsByTagName("button")[x].addEventListener("touchstart", function () {
             btn.style="background-color: #ff6659; box-shadow: 0 3px 6px #00000061;"
         })
-        btn.addEventListener("touchend", function () {
+        document.getElementsByTagName("button")[x].addEventListener("touchend", function () {
             btn.style=""
         })
     }
@@ -212,4 +212,34 @@ function back_notifs_action() {
 
 function addtonotifs(msg) {
     notifs[notifs.length]=msg
+}
+
+
+// signin
+
+var a
+function signn(auth) {
+    a = auth;
+}
+
+function signin() {
+    email=document.getElementById("emailuser").value
+    password=document.getElementById("pswd").value
+    console.log("test")
+    a.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+    .then(function() {
+        return a.signInWithEmailAndPassword(email, password).then(
+            function() {
+                console.log("Signed In")
+            }
+        ).catch(function(err) {
+            document.getElementById("verifmessage").style.display="inline"
+            document.getElementById("verifmessage").innerText="User doesn't exist."
+            showprofile();
+            console.log(err.message)
+        })
+    })
+    .catch(function(error) {
+        console.log(error.message)
+    })
 }

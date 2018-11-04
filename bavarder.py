@@ -8,7 +8,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 from google.appengine.ext import ndb
 from google.appengine.api import app_identity
 
-version = "Beta v0.4.0"
+version = "Beta v0.5.1"
 
 def get_at():
     a=ServiceAccountCredentials.from_json_keyfile_dict(sendmsg.kfdict, "https://www.googleapis.com/auth/firebase.messaging")
@@ -24,7 +24,8 @@ urls=(
     "/changesetting", "set",
     "/delprof", "delprof",
     "/associateprof", "allownotifs",
-    "/makeuser", "mkusr"
+    "/makeuser", "mkusr",
+    "/createacct", "create"
 )
 
 app=web.application(urls, globals())
@@ -38,7 +39,6 @@ class msg(ndb.Model):
 
 class user(ndb.Model):
     user=ndb.StringProperty()
-    picurl=ndb.StringProperty()
     dark_theme=ndb.BooleanProperty()
     noir=ndb.BooleanProperty()
     contacts=ndb.StringProperty(repeated=True)
@@ -61,6 +61,15 @@ class index:
                 usr.put()
                 return '<head><meta http-equiv="refresh" content="0; url=/" /></head>'
 
+
+class create:
+    def GET(self):
+        return render.create()
+
+    def POST(self):
+        x = web.input()
+        return render.send(x.email, x.pswd)
+
 class clog:
     def GET(self):
         return render.clog(version)
@@ -70,15 +79,11 @@ class mkusr:
         x = web.input()
         q=user.query().fetch()
 
-        for human in q:
-            if human.user == x.email:
-                k=human.key.get()
-                k.picurl=x.picurl
-                k.put()
-                return 'profile picture url updated'
-
+        for person in q:
+            if person.user==x.email:
+                return 'user already exists'
         userset = user(
-            user=x.email, picurl=x.picurl
+            user=x.email
         )
         set_key = userset.put()
 
@@ -104,8 +109,6 @@ class sendmesg:
             if person.user == x.to:
                 for ids in person.notifclientids:
                     nids.append(ids)
-            if person.user == x.email:
-                picurl = person.picurl
 
         http = httplib2.Http()
 
@@ -133,13 +136,13 @@ class sendmesg:
                                 }
                             ],
                             'badge': '/notificon.ico',
-                            'icon': '{0}'.format(picurl)
+                            'icon': '/icon-512.png'
                         }
                     },
                     'android':{
                         'notification':{
                             'color': '#d32f2f',
-                            'icon': '{0}'.format(picurl)
+                            'icon': '/icon-512.png'
                         }
                     },
                 },
@@ -182,15 +185,14 @@ class grabcontacts:
                         if human.user == contact:
                             usercontacts.append(
                                 {
-                                    'name': contact,
-                                    'image': human.picurl
+                                    'name': contact
                                 }
                             )
                 if results[y].dark_theme==True:
                     darktheme=True
                 if results[y].noir==True:
                     oleddarktheme=True
-        print usercontacts
+
 
         return json.dumps({"contacts":usercontacts, "dark":darktheme, "oleddark":oleddarktheme})
 
@@ -272,7 +274,6 @@ class allownotifs:
     def POST(self):
         x = web.input()
         q = user.query().fetch()
-
         for y in range(len(q)):
             if q[y].user==x.email:
                 users=q[y].key.get()

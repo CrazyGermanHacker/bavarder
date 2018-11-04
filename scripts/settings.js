@@ -67,7 +67,7 @@ function toggleamoleddark(){
     }
 }
 
-function getusersettings(email){
+function getusersettings(messaging){
     var request = new XMLHttpRequest()
     request.open("POST", "/user", async=true)
     request.addEventListener("load", function() {
@@ -80,14 +80,8 @@ function getusersettings(email){
             document.getElementById("users").innerHTML+=
             '<div class="chatbutton" style="padding: 16px; display: flex; align-items: center; justify-content: center" onclick="chat_action(\''
             +contact.name+'\')" id="'+contact.name+'"></div>'
-            if (contact.image){
-                document.getElementById(contact.name).innerHTML=
-                    '<img src="'+contact.image+'" style="width: 64px; margin-right: 8px;" /><span style="">'+contact.name+'</span>'   
-            }
-            else{
-                document.getElementById(contact.name).innerHTML=
-                    '<span style="">'+contact.name+'</span>'    
-            }
+            document.getElementById(contact.name).innerHTML=
+                '<span style="">'+contact.name+'</span>'    
         }
         if (prs.oleddark==true){
             document.getElementById("noirmode").checked=true;
@@ -96,7 +90,7 @@ function getusersettings(email){
             toggledark()
         }
     })
-
+    requestnotifs(messaging)
     var f = document.getElementById("add_form")
     var em = new FormData(f)
 

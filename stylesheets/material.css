@@ -219,7 +219,7 @@ button:focus {
     padding-left: 4px;
     background: #ef9a9a;
     box-shadow: 0 3px 6px #00000061;
-    border-radius: 128px;
+    border-radius: 24px;
     width: 52px;
     color: black;
     transition: all 250ms cubic-bezier(0.25, 0.8, 0.25, 1) 0ms;
@@ -235,7 +235,7 @@ button:focus {
     transition: all 0.5s cubic-bezier(.25,.8,.25,1);
     background: #ef9a9a;
     color: black;
-    border-radius: 128px;
+    border-radius: 24px;
     padding-top: 18px;
     margin-right: -80px;
     position: fixed;

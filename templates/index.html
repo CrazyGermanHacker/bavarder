@@ -42,7 +42,7 @@ $def with(sdr, version)
         <div class="bottomnav">
             <div class="leftbtns">
                 <div class="hdiconbtn" id="signinbtn" onclick="showprofile()">
-                    <i class="material-icons" style="font-size: 24px;">person</i>
+                    <i class="material-icons" style="font-size: 24px;">account_circle</i>
                 </div>
                 <button id="installbutton">
                     <i class="material-icons" style="padding: 0px; margin-left: 0px;" id="installicon">get_app</i>
@@ -88,12 +88,30 @@ $def with(sdr, version)
                     Profile
                 </h2>
             </div>
+
+
             <div class="card" id="signinscreen">
-                <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark" style="text-align: center;"></div>
+                <h3>Sign In</h3>
+                <p id="verifmessage" style="color: #d32f2f; display: none">Please verify your email and reload the page.</p>
+                <form id="signinform"onkeypress="return event.keyCode != 13;">
+                    <input id="emailuser" autocomplete="username" placeholder="email" />
+                    <br>
+                    <br>
+                    <input id="pswd" autocomplete="current-password" placeholder="password" type="password" />
+                    <br>
+                    <br>
+                </form>
+                <button onclick="signin()">SIGN IN</button>
+                <br>
+                <br>
+                <button onclick="window.location.href='/createacct'">CREATE ACCOUNT</button>
             </div>
+
+
+
+
             <div class="scroll" id="profilepage">
                 <div class="card">
-                    <div id="profileimg"></div>
                     <h2 id="name"></h2>
                 </div>
                 <div class="card">
@@ -144,7 +162,6 @@ $def with(sdr, version)
                     <input type="text" name="user" placeholder="username" id="unameip"/>
                     <input type="hidden" name="email" id="email"/>
                     <input type="hidden" name="notifid" id="notifid"/>
-                    <input type="hidden" name="picurl" id="picurl"/>
                     <br/>
                     <br/>
                     <button type="submit" id="add_btn" style="background: lightgrey; color: black" disabled>
@@ -228,7 +245,7 @@ $def with(sdr, version)
                     <b id="user"></b>
                 </h2>
             </div>
-            <div id="messages" class="scroll"></div>
+            <div id="messages" style="top: 56px;" class="scroll"></div>
             <div class="wrappermsg">
                 <div class="messagebar">
                     <form id="messagefield" onkeypress="return event.keyCode != 13;" autocomplete="off">
@@ -250,6 +267,7 @@ $def with(sdr, version)
 </html>
 <script src="https://www.gstatic.com/firebasejs/5.5.4/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.5.4/firebase-messaging.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.5.7/firebase-auth.js"></script>
 <script>
     // Initialize Firebase
     var config = {
@@ -262,37 +280,48 @@ $def with(sdr, version)
     };
     firebase.initializeApp(config);
     const messaging = firebase.messaging()
+    const auth = firebase.auth()
 
     messaging.onMessage(function(message) {
         addtonotifs(message)
     })
+
+    signn(auth)
+    auth.onAuthStateChanged(function(user) {
+        if (user) {
+            if (user.emailVerified) {
+                var em = user.email;
+                document.getElementById("settings_main").style.display = "inline-block";
+                document.getElementById("emailform").value = em
+                document.getElementById("emailform2").value = em
+                document.getElementById("email").value = em
+                document.getElementById("signinmsg").style.display = "none";
+                document.getElementById("signinscreen").style.display = "none"
+                document.getElementById("profilepage").style.display = "inline-block"
+                document.getElementById("name").innerHTML = em
+                getusersettings(messaging)
+                addprof()
+            }
+            else{
+                document.getElementById("verifmessage").style.display="inline"
+                showprofile();
+            }
+        }
+        else {
+            showprofile();
+            console.log("signed out")
+        }
+    })
 </script>
 <script>
-    function onSignIn(googleUser) {
-        // Useful data for your client-side scripts:
-        var profile = googleUser.getBasicProfile();
-
-        // The ID token you need to pass to your backend:
-        var id_token = googleUser.getAuthResponse().id_token;
-        document.getElementById("settings_main").style.display = "inline-block";
-        document.getElementById("emailform").value = profile.getEmail()
-        document.getElementById("picurl").value = profile.getImageUrl()
-        document.getElementById("emailform2").value = profile.getEmail()
-        document.getElementById("email").value = profile.getEmail()
-        document.getElementById("signinmsg").style.display = "none";
-        document.getElementById("signinbtn").innerHTML = "<img alt='Profile'src=" + profile.getImageUrl() + " style='width: 24px; border-radius: 16px; border: 2px solid #d32f2f'>"
-        document.getElementById("signinscreen").style.display = "none"
-        document.getElementById("profilepage").style.display = "inline-block"
-        document.getElementById("name").innerHTML = profile.getEmail()
-        document.getElementById("profileimg").innerHTML = "<img alt='Profile Settings' id='profilepicture' src='" + profile.getImageUrl() + "?sz=1000' style='width: 15vw;'>"
-        getusersettings(profile.getEmail())
-        addprof()
-        requestnotifs(messaging)
-    }
     function signOut() {
-        var a2 = gapi.auth2.getAuthInstance()
-        a2.signOut().then(function() {
-            window.location.reload()
+        auth.setPersistence(firebase.auth.Auth.Persistence.NONE).then(function () {
+            return auth.signOut().then(function () {
+                window.location.reload()
+            })
+        })
+        .catch(function(err) {
+            console.log(err.message)
         })
     }
     if ('$sdr'!='') {
