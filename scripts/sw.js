@@ -37,7 +37,7 @@ self.addEventListener('fetch', function(event) {
 
 self.addEventListener('activate', function(event) {
 
-    var cacheWhitelist = [''];
+    var cacheWhitelist = ['bavardercsh-b054'];
 
     event.waitUntil(
         caches.keys().then(function(cacheNames) {
